@@ -9,3 +9,9 @@ resource "helm_release" "argocd" {
 
   values = [file("values/argocd.yaml")]
 }
+
+resource "helm_release" "root-sync-app" {
+  chart            = "root-sync-app"
+  name             = "root-sync-app"
+  values = [file("values/sync-app.yaml")]
+}

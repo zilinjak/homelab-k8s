@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  project: default
+
+  source:
+    repoURL: {{ .Values.repository }} # Replace with your Git repository URL
+    targetRevision: {{ .Values.ref }} # Replace with a branch, tag, or commit SHA
+    path: {{ .Values.path }} # Replace with the path in the repo containing Kubernetes manifests
+
+  destination:
+    server: 'https://kubernetes.default.svc' # Defaults to the Kubernetes cluster where ArgoCD is running
+    namespace: {{ .Values.namespace }}
+
+  syncPolicy:
+    automated:
+      prune: true # Automatically delete resources that are no longer defined in Git
+      selfHeal: true # Automatically sync when out of sync
+    syncOptions:
+      - CreateNamespace=true # Automatically create namespace if it doesn't exist

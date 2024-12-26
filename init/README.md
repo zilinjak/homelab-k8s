@@ -1,5 +1,7 @@
 # Initialize Kubernetes Cluster with all the required components
-
+After nitializing the of the k8s, the cluster will contain the following components:
+ - ArgoCD installation
+ - ArgoCD application
 ## Prerequisites
 ...
 
