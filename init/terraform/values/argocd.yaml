@@ -4,8 +4,7 @@ server:
     servicePortHttp: 30000
     servicePortHttps: 30001
 
-config:
+configs:
   secret:
-  # This is not working because https://github.com/argoproj/argo-helm/issues/3089
-    argocdServerAdminPassword: '$2a$10$71Q12ZfQ/kx.nMb150mFverIfxwYiNxGzrQrgTUBM7aWwBtRih6jW'
-    argocdServerAdminPasswordMtime: '2024-12-26T18:03:29Z'
+    argocdServerAdminPassword: '$2a$10$.nVpvcRBopcfbCWaNtSLauHBkDNjz4uixh9TPkNhZIoDHYWIVUd8u'
+    argocdServerAdminPasswordMtime: '2025-01-01T23:17:27Z'
