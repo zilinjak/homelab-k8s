@@ -1,10 +1,13 @@
-server:
-  service:
-    type: LoadBalancer
-    servicePortHttp: 30000
-    servicePortHttps: 30001
-
 configs:
   secret:
-    argocdServerAdminPassword: '$2a$10$.nVpvcRBopcfbCWaNtSLauHBkDNjz4uixh9TPkNhZIoDHYWIVUd8u'
-    argocdServerAdminPasswordMtime: '2025-01-01T23:17:27Z'
+      argocdServerAdminPassword: "$2a$10$.nVpvcRBopcfbCWaNtSLauHBkDNjz4uixh9TPkNhZIoDHYWIVUd8u"
+      argocdServerAdminPasswordMtime: "2025-01-01T23:17:27Z"
+
+  params:
+    server.insecure: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: "cloudflare-tunnel"
+    hostname: "argocd.zilinek.fun"
