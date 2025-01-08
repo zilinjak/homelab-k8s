@@ -1,3 +1,5 @@
 init/terraform/.terraform
 init/terraform/.terraform.lock.hcl
 init/terraform/terraform.tfstate*
+init/terraform/secret.tfvars
+init/terraform/files/*
