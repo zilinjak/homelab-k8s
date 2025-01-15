@@ -9,5 +9,5 @@ configs:
 server:
   ingress:
     enabled: true
-    ingressClassName: "cloudflare-tunnel"
+    ingressClassName: "nginx"
     hostname: "argocd.zilinek.fun"
