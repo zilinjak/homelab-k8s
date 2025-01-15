@@ -2,7 +2,7 @@
 
 if [ -f ~/.ready ]; then
     echo "Installing and starting"
-    curl -sfL https://get.k3s.io | sh -
+    curl -sfL https://get.k3s.io | sh -s - --disable=traefik
     echo "K3S started"
 
     git clone https://github.com/zilinjak/homelab-k8s && cd homelab-k8s/init/terraform
