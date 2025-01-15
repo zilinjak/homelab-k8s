@@ -7,8 +7,7 @@ if [ -f ~/.ready ]; then
 
     git clone https://github.com/zilinjak/homelab-k8s && cd homelab-k8s/init/terraform
     terraform init
-    terraform apply -auto-approve
-
+    terraform apply -var='kubeconfig_path=/etc/rancher/k3s/k3s.yaml'
     exit 0
 fi
 
