@@ -21,6 +21,17 @@ spec:
             enabeld: true
             hosts: [ "alertmanager.zilinek.fun" ]
             ingressClassName: "nginx"
+        grafana:
+          ingress:
+            enabeld: true
+            hosts: [ "grafana.zilinek.fun" ]
+            ingressClassName: "nginx"
+        prometheus:
+          ingress:
+            enabeld: true
+            hosts: [ "prometheus.zilinek.fun" ]
+            ingressClassName: "nginx"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring  # Target namespace for deployment
