@@ -21,6 +21,7 @@ Initially we wanted to use the `cloudflared` ingress controller, but after a whi
 - [x] Ingress Cloudflare tunnel - https://github.com/STRRL/cloudflare-tunnel-ingress-controller
     - needs to be uninstalled and then added to helmchart :]
     - decided to not use it after all
+- [ ] LongHorn - Storage interface
 - [ ] Prometheus
 - [ ] Grafana
 - [ ] Loki
