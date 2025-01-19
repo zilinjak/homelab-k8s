@@ -12,16 +12,15 @@ spec:
     helm:
       releaseName: prometheus
       values: |
-        # Contents of kube-prometheus-stack-values.yaml
-        # Example of an override:
         prometheus:
           prometheusSpec:
             retention: 15d
             serviceMonitorSelectorNilUsesHelmValues: false
-        # Add more configurations as required from your values file
-        alertmanager.ingress.enabled: true
-        alertmanager.ingress.hosts: [ "alertmanager.zilinek.fun" ]
-        alertmanager.ingress.ingressClassName: "nginx"
+        alertmanager:
+          ingress:
+            enabeld: true
+            hosts: [ "alertmanager.zilinek.fun" ]
+            ingressClassName: "nginx"
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring  # Target namespace for deployment
