@@ -12,21 +12,19 @@ spec:
     helm:
       values: |
         prometheus:
-          prometheusSpec:
-            retention: 15d
-            serviceMonitorSelectorNilUsesHelmValues: false
+          enabled: true
           ingress:
-            enabeld: true
+            enabled: true
             hosts: [ "prometheus.zilinek.fun" ]
             ingressClassName: "nginx"
         alertmanager:
           ingress:
-            enabeld: true
+            enabled: true
             hosts: [ "alertmanager.zilinek.fun" ]
             ingressClassName: "nginx"
         grafana:
           ingress:
-            enabeld: true
+            enabled: true
             hosts: [ "grafana.zilinek.fun" ]
             ingressClassName: "nginx"
 
