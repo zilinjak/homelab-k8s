@@ -10,12 +10,15 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 68.2.1
     helm:
-      releaseName: prometheus
       values: |
         prometheus:
           prometheusSpec:
             retention: 15d
             serviceMonitorSelectorNilUsesHelmValues: false
+          ingress:
+            enabeld: true
+            hosts: [ "prometheus.zilinek.fun" ]
+            ingressClassName: "nginx"
         alertmanager:
           ingress:
             enabeld: true
@@ -26,11 +29,7 @@ spec:
             enabeld: true
             hosts: [ "grafana.zilinek.fun" ]
             ingressClassName: "nginx"
-        prometheus:
-          ingress:
-            enabeld: true
-            hosts: [ "prometheus.zilinek.fun" ]
-            ingressClassName: "nginx"
+
 
   destination:
     server: https://kubernetes.default.svc
