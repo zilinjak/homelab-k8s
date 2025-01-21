@@ -28,3 +28,4 @@ Initially we wanted to use the `cloudflared` ingress controller, but after a whi
 - [ ] Tempo
 - [ ] OtelCollector
 - [ ] Documentation App ( React ?)
+- [ ] Plex
