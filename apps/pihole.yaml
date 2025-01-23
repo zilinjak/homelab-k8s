@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://mojo2600.github.io/pihole-kubernetes/
     chart: pihole
-    targetRevision: latest
+    targetRevision: 2.27.0
     helm:
       values: |
         ingress:
