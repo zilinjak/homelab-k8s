@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pihole
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://mojo2600.github.io/pihole-kubernetes/
+    chart: pihole
+    targetRevision: latest
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          hosts:
+          - pihole.zilinek.fun
+
+        serviceWeb:
+          loadBalancerIP: 192.168.1.100
+          type: ClusterIP
+
+        adminPassword: "admin"
+
+        serviceDns:
+          loadBalancerIP: 192.168.1.100
+          type: LoadBalancer
+
+        doh:
+          enabled: true
+          pullPolicy: Always
+          envVars:
+            DOH_UPSTREAM: "https://1.1.1.1/dns-query"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pihole
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
