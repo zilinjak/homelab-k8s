@@ -1,7 +1,6 @@
 # homelab-k8s
+I have decided to create a homelab, mainly to improve my skills in k8s and knowledge Im missing. Main reason is that I want to learn stuff that is being done by my colleagues at work (Yes, Im DevOps Engineer). I want to learn about whole infrastructure, how to manage it, what each component does and how do they work. I know that I will never understand everything and more I know means that I know that I dont know much (hope that makes sence), but lets give it a try and see how far I can get.
 
-## Description
- This project 
 ## Current solution 
 
 - [x] ArgoCD
