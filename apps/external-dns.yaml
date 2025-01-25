@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/zilinjak/homelab-k8s.git'
+    targetRevision: HEAD
+    path: helm/external-dns-pihole
+    helm:
+      values: |
+        piholeServer: 'http://pihole-web.pihole.svc.cluster.local'
+        password: 'admin'
+        targetNamespace: 'external-dns'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: external-dns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
