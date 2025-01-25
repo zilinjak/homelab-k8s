@@ -1,3 +1,4 @@
 # password: admin
 # piholeServer: http://pihole-web.pihole.svc.cluster.local
 # targetNamespace: external-dns
+# domainFilter: 'internal.zilinek.fun'

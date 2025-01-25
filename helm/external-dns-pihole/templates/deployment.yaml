@@ -26,6 +26,7 @@ spec:
         - --policy=sync
         - --provider=pihole
         - --pihole-server={{ .Values.piholeServer }}
+        - --domain-filter={{ .Values.domainFilter }}
         - --log-level=trace
         - --log-format=text
         - --dry-run
