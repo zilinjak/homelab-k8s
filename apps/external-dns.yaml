@@ -13,6 +13,7 @@ spec:
       values: |
         piholeServer: 'http://pihole-web.pihole.svc.cluster.local'
         password: 'admin'
+        logLevel: 'info'
         targetNamespace: 'external-dns'
         domainFilter: 'internal.zilinek.fun'
   destination:
