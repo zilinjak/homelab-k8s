@@ -25,10 +25,8 @@ spec:
         grafana:
           ingress:
             enabled: true
-            hosts: [ "alertmanager.internal.zilinek.fun" ]
+            hosts: [ "grafana.internal.zilinek.fun" ]
             ingressClassName: "nginx"
-
-
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring  # Target namespace for deployment
