@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: ingress-nginx-internal
   namespace: argocd
 spec:
   project: default
@@ -16,7 +16,7 @@ spec:
         prometheus.serviceMonitor.create: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: ingress-nginx-internal
   syncPolicy:
     automated:
       prune: true
