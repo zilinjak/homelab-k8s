@@ -16,6 +16,7 @@ spec:
         logLevel: 'info'
         targetNamespace: 'external-dns'
         domainFilter: 'internal.zilinek.fun'
+        dryRun: false
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: external-dns

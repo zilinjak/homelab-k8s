@@ -10,4 +10,4 @@ server:
   ingress:
     enabled: true
     ingressClassName: "nginx"
-    hostname: "argocd.zilinek.fun"
+    hostname: "argocd.internal.zilinek.fun"
