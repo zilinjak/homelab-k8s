@@ -15,7 +15,7 @@ spec:
           enabled: true
           ingressClassName: nginx
           hosts:
-          - pihole.zilinek.fun
+          - pihole.internal.zilinek.fun
 
         serviceWeb:
           type: ClusterIP

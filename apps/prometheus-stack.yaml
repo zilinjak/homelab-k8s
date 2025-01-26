@@ -15,17 +15,17 @@ spec:
           enabled: true
           ingress:
             enabled: true
-            hosts: [ "prometheus.zilinek.fun" ]
+            hosts: [ "prometheus.internal.zilinek.fun" ]
             ingressClassName: "nginx"
         alertmanager:
           ingress:
             enabled: true
-            hosts: [ "alertmanager.zilinek.fun" ]
+            hosts: [ "alertmanager.internal.zilinek.fun" ]
             ingressClassName: "nginx"
         grafana:
           ingress:
             enabled: true
-            hosts: [ "grafana.zilinek.fun" ]
+            hosts: [ "alertmanager.internal.zilinek.fun" ]
             ingressClassName: "nginx"
 
 
