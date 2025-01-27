@@ -25,11 +25,9 @@ spec:
         serviceDns:
           type: LoadBalancer
 
-        doh:
-          enabled: true
-          pullPolicy: Always
-          envVars:
-            DOH_UPSTREAM: "https://1.1.1.1/dns-query"
+        podDnsConfig:
+          nameservers:
+            - 8.8.8.8
 
   destination:
     server: https://kubernetes.default.svc
