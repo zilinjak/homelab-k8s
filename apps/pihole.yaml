@@ -29,6 +29,12 @@ spec:
           nameservers:
             - 8.8.8.8
 
+        monitoring:
+          podMonitor:
+            enabled: true
+          sidecar:
+            enabled: true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: pihole
