@@ -33,3 +33,25 @@ I have decided to create a homelab, mainly to improve my skills in k8s and knowl
 
 ### Ingress
 Initially we wanted to use the `cloudflared` ingress controller, but after a while I have decided that I want to learn how to properly route the data via public internet, DNS and Ingress Nginx controller. Hence we are now using the `ingress-nginx` controller.
+
+
+### Longhorn
+
+#### Install LonghornCLI
+```bash
+curl -L https://github.com/longhorn/cli/releases/download/${LonghornVersion}/longhornctl-${OS}-${ARCH} -o longhornctl
+chmod +x longhornctl
+mv ./longhornctl /usr/local/bin/longhornctl
+```
+
+#### Prepare the nodes
+Run following on all nodes:
+```bash
+sudo apt install open-iscsi cryptsetup nfs-common
+longhornctl install preflight
+```
+
+#### Validate settings
+```bash
+longhornctl check preflight
+```
