@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plex-media-server
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
+    chart: plex-media-server
+    targetRevision: 2.27.0
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          url: "plex.internal.zilinek.fun"
+        pms:
+          storageClassName: "longhorn-static"
+          configStorage: 50Gi
+        extraEnv:
+          PLEX_CLAIM: "claim-fz8Fv3MzifxyDyezshBn"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: plex-media-server
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
