@@ -1,23 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kuard
+  name: httpbin
   annotations: 
     cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - test-app.internal.zilinek.fun
+    - httpbin.zilinek.fun
     secretName: quickstart-example-tls
   rules:
-  - host: test-app.internal.zilinek.fun
+  - host: httpbin.zilinek.fun
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: kuard
+            name: httpbin
             port:
               number: 80
