@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - example.example.com
+    - test-app.internal.zilinek.fun
     secretName: quickstart-example-tls
   rules:
-  - host: example.example.com
+  - host: test-app.internal.zilinek.fun
     http:
       paths:
       - path: /
