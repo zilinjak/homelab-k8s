@@ -12,7 +12,8 @@ spec:
     helm:
       values: |
         crds:
-          enable: true
+          enabled: true
+          keep: false
         prometheus:
           enabled: true
           servicemonitor:
