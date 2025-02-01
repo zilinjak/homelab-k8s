@@ -14,6 +14,7 @@ spec:
         prometheus.create: true
         prometheus.service.create: true
         prometheus.serviceMonitor.create: true
+        controller.service.loadBalancerIP: 192.168.0.240
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx-internal

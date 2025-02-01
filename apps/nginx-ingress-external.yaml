@@ -1,25 +1,29 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: ingress-nginx-external
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://kubernetes.github.io/ingress-nginx
-#     targetRevision: 4.12.0
-#     chart: ingress-nginx
-#     helm:
-#       values: |
-#         controller:
-#           ingressClassResource:
-#             name: nginx-public
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: ingress-nginx-external
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#     - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx-external
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.12.0
+    chart: ingress-nginx
+    helm:
+      values: |
+        controller:
+          ingressClassResource:
+            name: nginx-public
+        prometheus.create: true
+        prometheus.service.create: true
+        prometheus.serviceMonitor.create: true
+        controller.service.loadBalancerIP: 192.168.0.241
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx-external
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
