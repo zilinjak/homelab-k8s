@@ -13,7 +13,7 @@ spec:
         app: httpbin
     spec:
       containers:
-      - image: mccutchen/go-httpbin
+      - image: kong/httpbin:latest
         imagePullPolicy: Always
         name: httpbin
         ports:
