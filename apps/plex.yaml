@@ -19,7 +19,7 @@ spec:
           storageClassName: "longhorn-static"
           configStorage: 50Gi
         extraEnv:
-          PLEX_CLAIM: "claim-fz8Fv3MzifxyDyezshBn"
+          PLEX_CLAIM: "claim-Pa-X_DPyFzxKEbwcri89"
   destination:
     server: https://kubernetes.default.svc
     namespace: plex-media-server
