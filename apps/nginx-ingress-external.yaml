@@ -11,18 +11,14 @@ spec:
     chart: ingress-nginx
     helm:
       values: |
-        # controller.ingressClass: nginx-external
-        # ingressClass: nginx-external
-        ingressClassName: nginx-external
-
         controller:
-          # ingressClassResource:
-          #   enabled: true
-          #   name: nginx-external
-          #   controllerValue: k8s.io/ingress-nginx-external
-          #   ingressClass: nginx-external
-          # extraArgs:
-          #   ingress-class: nginx-external
+          electionID: ingress-controller-leader
+          ingressClass: external-nginx  # default: nginx
+          ingressClassResource:
+            name: external-nginx  # default: nginx
+            enabled: true
+            default: false
+            controllerValue: "k8s.io/external-ingress-nginx"
           service:
             loadBalancerIP: 192.168.0.241
   destination:
