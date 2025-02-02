@@ -11,7 +11,8 @@ spec:
     chart: ingress-nginx
     helm:
       values: |
-        controller.ingressClass: nginxlh
+        controller.ingressClass: nginx-external
+        ingressClass: nginx-external
         controller.service.loadBalancerIP: 192.168.0.241
   destination:
     server: https://kubernetes.default.svc
