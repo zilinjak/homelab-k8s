@@ -13,6 +13,7 @@ spec:
       values: |
         controller.ingressClass: nginx-external
         ingressClass: nginx-external
+        ingressClassName: nginx-external
 
         controller:
           ingressClassResource:
