@@ -15,14 +15,14 @@ spec:
         # ingressClass: nginx-external
         ingressClassName: nginx-external
 
-        # controller:
-        #   ingressClassResource:
-        #     enabled: true
-        #     name: nginx-external
-        #     controllerValue: k8s.io/ingress-nginx-external
-        #     ingressClass: nginx-external
-        #   extraArgs:
-        #     ingress-class: nginx-external
+        controller:
+          # ingressClassResource:
+          #   enabled: true
+          #   name: nginx-external
+          #   controllerValue: k8s.io/ingress-nginx-external
+          #   ingressClass: nginx-external
+          # extraArgs:
+          #   ingress-class: nginx-external
           service:
             loadBalancerIP: 192.168.0.241
   destination:
