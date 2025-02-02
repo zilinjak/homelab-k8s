@@ -15,7 +15,7 @@ spec:
     solvers:
       - http01:
           ingress:
-            ingressClassName: nginx
+            ingressClassName: nginx-external
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -34,4 +34,4 @@ spec:
     solvers:
       - http01:
           ingress:
-            ingressClassName: nginx
+            ingressClassName: nginx-external
