@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: 1.41.3
+description: A Helm chart for deploying a PMS server to a Kubernetes cluster
+home: https://www.plex.tv
+icon: https://www.plex.tv/wp-content/themes/plex/assets/img/favicons/plex-152.png
+keywords:
+- plex
+- pms
+- Personal Media Server
+name: plex-media-server
+sources:
+- https://github.com/plexinc/pms-docker
+type: application
+version: 0.8.0
