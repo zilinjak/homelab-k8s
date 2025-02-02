@@ -13,9 +13,9 @@ spec:
       values: |
         controller:
           electionID: ingress-controller-leader
-          ingressClass: external-nginx  # default: nginx
+          ingressClass: nginx-external  # default: nginx
           ingressClassResource:
-            name: external-nginx  # default: nginx
+            name: nginx-external  # default: nginx
             enabled: true
             default: false
             controllerValue: "k8s.io/external-ingress-nginx"
