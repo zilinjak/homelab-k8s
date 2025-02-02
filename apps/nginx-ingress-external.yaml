@@ -12,8 +12,7 @@ spec:
     helm:
       values: |
         controller:
-          ingressClassResource:
-            name: nginx-external
+          ingressClass: nginx-external
         prometheus.create: true
         prometheus.service.create: true
         prometheus.serviceMonitor.create: true
