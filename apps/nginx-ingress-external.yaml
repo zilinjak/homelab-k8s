@@ -13,7 +13,7 @@ spec:
       values: |
         controller:
           ingressClassResource:
-            name: nginx-public
+            name: nginx-external
         prometheus.create: true
         prometheus.service.create: true
         prometheus.serviceMonitor.create: true

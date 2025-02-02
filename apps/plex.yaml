@@ -19,6 +19,7 @@ spec:
           storageClassName: "longhorn-static"
           configStorage: 50Gi
         extraEnv:
+          # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
           PLEX_CLAIM: "claim-Pa-X_DPyFzxKEbwcri89"
   destination:
     server: https://kubernetes.default.svc
