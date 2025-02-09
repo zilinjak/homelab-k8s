@@ -2,10 +2,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: downloads-pvc
+  name: data-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.downloadSpaceSize }}
@@ -14,10 +14,10 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: config-pvc
+  name: transmission-config-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Mi
@@ -26,10 +26,22 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: watch-pvc
+  name: transmission-watch-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: longhorn
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jellyfin-config-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Mi

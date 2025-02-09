@@ -1,4 +1,12 @@
-password: "admin"
-host: torrent.internal.zilinek.fun
 downloadSpaceSize: 500Gi
-ingressClassName: nginx
+
+transmission:
+  password: "admin"
+  host: torrent.internal.zilinek.fun
+  ingressClassName: nginx
+
+jellyfin:
+  host: jellyfin.internal.zilinek.fun
+  ingressClassName: nginx
+  publicHostname: jellyfin.zilinek.fun
+  publicIngressClassName: nginx-external

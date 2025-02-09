@@ -49,10 +49,10 @@ spec:
       volumes:
       - name: downloads-volume
         persistentVolumeClaim:
-          claimName: downloads-pvc
+          claimName: data-pvc
       - name: config-volume
         persistentVolumeClaim:
-          claimName: config-pvc
+          claimName: transmission-config-pvc
       - name: watch-volume
         persistentVolumeClaim:
-          claimName: watch-pvc
+          claimName: transmission-watch-pvc

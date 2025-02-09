@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: transmission-ingress
 spec:
-  ingressClassName: {{ .Values.ingressClassName }}
+  ingressClassName: {{ .Values.transmission.ingressClassName }}
   rules:
-    - host: {{ .Values.host }}
+    - host: {{ .Values.transmission.host }}
       http:
         paths:
           - path: /
