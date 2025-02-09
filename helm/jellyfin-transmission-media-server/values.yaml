@@ -1,0 +1,4 @@
+password: "admin"
+host: torrent.internal.zilinek.fun
+downloadSpaceSize: 500Gi
+ingressClassName: nginx
