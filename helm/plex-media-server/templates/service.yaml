@@ -23,3 +23,16 @@ spec:
       name: pms
   selector:
     {{- include "pms-chart.selectorLabels" . | nindent 4 }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: transmission-service
+spec:
+  selector:
+    {{- include "pms-chart.selectorLabels" . | nindent 4 }}
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    name: web-interface
+    port: 9091
