@@ -16,25 +16,14 @@ spec:
           ingressClassName: nginx
           hosts:
           - pihole.internal.zilinek.fun
-
         serviceWeb:
           type: ClusterIP
-
         adminPassword: "admin"
-
         serviceDns:
           type: LoadBalancer
-
         podDnsConfig:
           nameservers:
             - 8.8.8.8
-
-        monitoring:
-          podMonitor:
-            enabled: true
-          sidecar:
-            enabled: true
-
         serviceDns:
           mixedService: true
           type: LoadBalancer

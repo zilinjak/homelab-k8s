@@ -43,7 +43,7 @@ spec:
         - containerPort: 7359
           name: discovery-udp
           protocol: UDP
-        resources: {}
+        resources: {{ .Values.jellyfin.resources }}
         stdin: true
         tty: true
         volumeMounts:

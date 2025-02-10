@@ -15,9 +15,6 @@ spec:
           enabled: true
           ingressClassName: nginx
           host: longhorn.internal.zilinek.fun
-        metrics:
-          serviceMonitor:
-            enabled: true
         preUpgradeChecker:
           jobEnabled: false
 

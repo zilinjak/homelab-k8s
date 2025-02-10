@@ -11,3 +11,8 @@ jellyfin:
   ingressClassName: nginx
   publicHostname: jellyfin.zilinek.fun
   publicIngressClassName: nginx-external
+  resources:
+    requests:
+      memory: 1Gi
+    limits:
+      memory: 1Gi
