@@ -20,7 +20,7 @@ spec:
     - {{ .Values.accessMode }}
   resources:
     requests:
-      storage: 10Mi
+      storage: 1Gi
   storageClassName: longhorn
 ---
 kind: PersistentVolumeClaim
@@ -44,5 +44,5 @@ spec:
     - {{ .Values.accessMode }}
   resources:
     requests:
-      storage: 100Mi
+      storage: 1Gi
   storageClassName: longhorn
