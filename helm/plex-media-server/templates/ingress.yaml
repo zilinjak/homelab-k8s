@@ -29,10 +29,8 @@ spec:
   - hosts:
     - {{ trimPrefix "https://" .Values.ingress.url }}
     secretName: {{ .Values.ingress.certificateSecret | default (printf "%s-ingress-lets-encrypt" (include "pms-chart.fullname" .)) }}
-{{- end -}}
-
+{{ end }}
 ---
-
 {{ if .Values.publicIngress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
