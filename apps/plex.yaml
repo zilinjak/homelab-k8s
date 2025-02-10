@@ -11,6 +11,8 @@ spec:
     path: helm/plex-media-server
     helm:
       values: |
+        transmission:
+          host: transmission.internal.zilinek.fun
         ingress:
           enabled: true
           ingressClassName: "nginx"

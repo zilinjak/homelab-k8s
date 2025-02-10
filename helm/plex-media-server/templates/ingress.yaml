@@ -63,3 +63,21 @@ spec:
     - {{ trimPrefix "https://" .Values.publicIngress.url }}
     secretName: {{ .Values.publicIngress.certificateSecret | default (printf "%s-ingress-lets-encrypt" (include "pms-chart.fullname" .)) }}
 {{- end -}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: transmission-ingress
+spec:
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  rules:
+    - host: {{ .Values.transmission.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: transmission-service
+                port:
+                  name: web-interface
