@@ -17,7 +17,7 @@ spec:
           url: "plex.internal.zilinek.fun"
         pms:
           storageClassName: "longhorn-static"
-          configStorage: 50Gi
+          configStorage: 500Gi
         extraEnv:
           # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
           PLEX_CLAIM: "claim-yLMSPYGCRyfjes6EuMxK"
