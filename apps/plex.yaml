@@ -15,6 +15,12 @@ spec:
           enabled: true
           ingressClassName: "nginx"
           url: "plex.internal.zilinek.fun"
+        publicIngress:
+          enabled: true
+          ingressClassName: "nginx-external"
+          url: "plex.zilinek.fun"
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
         pms:
           storageClassName: "longhorn-static"
           configStorage: 500Gi

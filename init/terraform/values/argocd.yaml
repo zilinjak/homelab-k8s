@@ -5,6 +5,10 @@ configs:
 
   params:
     server.insecure: true
+  
+  cm:
+    exec.enabled: false
+
 
 server:
   ingress:

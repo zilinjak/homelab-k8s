@@ -30,3 +30,38 @@ spec:
     - {{ trimPrefix "https://" .Values.ingress.url }}
     secretName: {{ .Values.ingress.certificateSecret | default (printf "%s-ingress-lets-encrypt" (include "pms-chart.fullname" .)) }}
 {{- end -}}
+
+---
+
+{{- if .Values.publicIngress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "pms-chart.fullname" . }}-ingress
+  labels:
+    name: {{ include "pms-chart.fullname" . }}-ingress
+{{ include "pms-chart.labels" . | indent 4 }}
+{{- with .Values.publicIngress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+{{- if .Values.publicIngress.ingressClassName }}
+  ingressClassName: {{ .Values.publicIngress.ingressClassName }}
+{{- end }}
+  rules:
+  - host: {{ trimPrefix "https://" .Values.publicIngress.url }}
+    http:
+      paths:
+      - path: '/'
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "pms-chart.fullname" . }}
+            port:
+              number: 32400
+  tls:
+  - hosts:
+    - {{ trimPrefix "https://" .Values.publicIngress.url }}
+    secretName: {{ .Values.publicIngress.certificateSecret | default (printf "%s-ingress-lets-encrypt" (include "pms-chart.fullname" .)) }}
+{{- end -}}
