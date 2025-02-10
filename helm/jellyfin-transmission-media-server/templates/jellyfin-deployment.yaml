@@ -23,10 +23,6 @@ spec:
           claimName: data-pvc
       containers:
       - env:
-        - name: PGID
-          value: "\x36\x35\x35\x34\x31"
-        - name: PUID
-          value: "\x31\x30\x34\x34"
         - name: TZ
           value: Europe/Prague
         securityContext:

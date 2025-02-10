@@ -1,58 +1,58 @@
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: transmission-deployment
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: transmission
-  template:
-    metadata:
-      labels:
-        app: transmission
-    spec:
-      containers:
-      - name: transmission-container
-        image: ghcr.io/linuxserver/transmission
-        ports:
-        - containerPort: 9091
-          name: web-interface
-          protocol: TCP
-        - containerPort: 51413
-          name: torrent-tcp
-          protocol: TCP
-        - containerPort: 51413
-          name: torrents-udp
-          protocol: UDP
-        volumeMounts:
-        - mountPath: /downloads
-          name: downloads-volume
-        - mountPath: /config
-          name: config-volume
-        - mountPath: /watch
-          name: watch-volume
-        env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        - name: TZ
-          value: "Europe/Prague"
-        - name: USER
-          value: "admin"
-        - name: PASS
-          valueFrom:
-            secretKeyRef:
-              name: transmission-secrets
-              key: transmission-password
-      volumes:
-      - name: downloads-volume
-        persistentVolumeClaim:
-          claimName: data-pvc
-      - name: config-volume
-        persistentVolumeClaim:
-          claimName: transmission-config-pvc
-      - name: watch-volume
-        persistentVolumeClaim:
-          claimName: transmission-watch-pvc
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: transmission-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: transmission
+#   template:
+#     metadata:
+#       labels:
+#         app: transmission
+#     spec:
+#       containers:
+#       - name: transmission-container
+#         image: ghcr.io/linuxserver/transmission
+#         ports:
+#         - containerPort: 9091
+#           name: web-interface
+#           protocol: TCP
+#         - containerPort: 51413
+#           name: torrent-tcp
+#           protocol: TCP
+#         - containerPort: 51413
+#           name: torrents-udp
+#           protocol: UDP
+#         volumeMounts:
+#         - mountPath: /downloads
+#           name: downloads-volume
+#         - mountPath: /config
+#           name: config-volume
+#         - mountPath: /watch
+#           name: watch-volume
+#         env:
+#         - name: PUID
+#           value: "1000"
+#         - name: PGID
+#           value: "1000"
+#         - name: TZ
+#           value: "Europe/Prague"
+#         - name: USER
+#           value: "admin"
+#         - name: PASS
+#           valueFrom:
+#             secretKeyRef:
+#               name: transmission-secrets
+#               key: transmission-password
+#       volumes:
+#       - name: downloads-volume
+#         persistentVolumeClaim:
+#           claimName: data-pvc
+#       - name: config-volume
+#         persistentVolumeClaim:
+#           claimName: transmission-config-pvc
+#       - name: watch-volume
+#         persistentVolumeClaim:
+#           claimName: transmission-watch-pvc
