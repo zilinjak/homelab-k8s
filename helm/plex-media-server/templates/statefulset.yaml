@@ -145,6 +145,25 @@ spec:
           mountPath: /config
         - name: pms-transcode
           mountPath: /transcode
+      - name: transmission
+        image: ghcr.io/linuxserver/transmission
+        ports:
+        - containerPort: 9091
+          name: web-interface
+          protocol: TCP
+        - containerPort: 51413
+          name: torrent-tcp
+          protocol: TCP
+        - containerPort: 51413
+          name: torrents-udp
+          protocol: UDP
+        volumeMounts:
+        - mountPath: /downloads
+          name: pms-config
+        - mountPath: /config
+          name: transmission-config
+        - mountPath: /watch
+          name: transmission-watch
       {{- if and .Values.rclone.enabled .Values.rclone.configSecret }}
       {{- range .Values.rclone.remotes }}
         - name: rclone-media-{{ (split ":" .)._0 }}
@@ -209,4 +228,25 @@ spec:
       resources:
         requests:
           storage: {{ .Values.pms.configStorage }}
+  - metadata:
+      name: transmission-config
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      {{- if .Values.pms.storageClassName }}
+      storageClassName: {{ .Values.pms.storageClassName }}
+      {{- end }}
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: transmission-watch
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      {{- if .Values.pms.storageClassName }}
+      storageClassName: {{ .Values.pms.storageClassName }}
+      {{- end }}
+      resources:
+        requests:
+          storage: 1Gi
+
   {{- end }}
