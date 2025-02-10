@@ -1,4 +1,5 @@
 downloadSpaceSize: 500Gi
+accessMode: ReadWriteOnce
 
 transmission:
   password: "admin"

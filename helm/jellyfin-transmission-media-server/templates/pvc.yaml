@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - {{ .Values.accessMode }}
   resources:
     requests:
       storage: {{ .Values.downloadSpaceSize }}
@@ -17,7 +17,7 @@ metadata:
   name: transmission-config-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - {{ .Values.accessMode }}
   resources:
     requests:
       storage: 10Mi
@@ -29,7 +29,7 @@ metadata:
   name: transmission-watch-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - {{ .Values.accessMode }}
   resources:
     requests:
       storage: 100Mi
@@ -41,7 +41,7 @@ metadata:
   name: jellyfin-config-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - {{ .Values.accessMode }}
   resources:
     requests:
       storage: 100Mi
