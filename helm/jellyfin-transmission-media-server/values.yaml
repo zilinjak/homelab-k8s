@@ -13,6 +13,6 @@ jellyfin:
   publicIngressClassName: nginx-external
   resources:
     requests:
-      memory: 2i
+      memory: 2Gi
     limits:
       memory: 2Gi
