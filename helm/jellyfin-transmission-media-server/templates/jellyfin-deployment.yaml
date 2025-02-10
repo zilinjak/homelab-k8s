@@ -43,7 +43,7 @@ spec:
         - containerPort: 7359
           name: discovery-udp
           protocol: UDP
-        resources: {{ .Values.jellyfin.resources }}
+        resources: {{ .Values.jellyfin.resources | toYaml | nindent 12 }}
         stdin: true
         tty: true
         volumeMounts:
