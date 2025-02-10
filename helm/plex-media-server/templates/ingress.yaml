@@ -33,7 +33,7 @@ spec:
 
 ---
 
-{{- if .Values.publicIngress.enabled -}}
+{{ if .Values.publicIngress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
