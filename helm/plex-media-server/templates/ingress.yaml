@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "pms-chart.fullname" . }}-ingress
+  name: {{ include "pms-chart.fullname" . }}-ingress-internal
   labels:
     name: {{ include "pms-chart.fullname" . }}-ingress
 {{ include "pms-chart.labels" . | indent 4 }}
@@ -37,7 +37,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "pms-chart.fullname" . }}-ingress
+  name: {{ include "pms-chart.fullname" . }}-ingress-external
   labels:
     name: {{ include "pms-chart.fullname" . }}-ingress
 {{ include "pms-chart.labels" . | indent 4 }}
