@@ -11,9 +11,6 @@ spec:
     path: helm/metallb
     helm:
       values: |
-        prometheus:
-          serviceMonitor:
-            enabled: true
         controller:
           logLevel: debug
 
