@@ -13,10 +13,10 @@ spec:
       values: |
         transmission:
           host: transmission.internal.zilinek.fun
-        ingress:
-          enabled: true
-          ingressClassName: "nginx"
-          url: "plex.internal.zilinek.fun"
+        # ingress:
+        #   enabled: true
+        #   ingressClassName: "nginx"
+        #   url: "plex.internal.zilinek.fun"
         publicIngress:
           enabled: true
           ingressClassName: "nginx-external"
