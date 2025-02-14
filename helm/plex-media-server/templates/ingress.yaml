@@ -70,7 +70,7 @@ kind: Ingress
 metadata:
   name: transmission-ingress
 spec:
-  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.tramission.ingressClassName }}
   rules:
     - host: {{ .Values.transmission.host }}
       http:
