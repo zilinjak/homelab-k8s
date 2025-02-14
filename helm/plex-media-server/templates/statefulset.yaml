@@ -15,6 +15,9 @@ spec:
     matchLabels:
       {{- include "pms-chart.selectorLabels" . | nindent 6 }}
   template:
+    securityContext:
+      runAsUser: 0
+      fsGroup: 0
     metadata:
       labels:
         {{- include "pms-chart.labels" . | nindent 8 }}
