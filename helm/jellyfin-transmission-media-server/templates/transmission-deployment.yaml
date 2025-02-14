@@ -12,6 +12,9 @@ spec:
       labels:
         app: transmission
     spec:
+      securityContext:
+        runAsUser: 0
+        fsGroup: 0
       containers:
       - name: transmission-container
         image: ghcr.io/linuxserver/transmission
