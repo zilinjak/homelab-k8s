@@ -150,6 +150,14 @@ spec:
           mountPath: /transcode
       - name: transmission
         image: ghcr.io/linuxserver/transmission
+        env:
+        - name: PUID
+          value: "0"
+        - name: PGID
+          value: "0"
+        - name: TZ
+          value: "Europe/Prague"
+
         ports:
         - containerPort: 9091
           name: web-interface
