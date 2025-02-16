@@ -36,10 +36,6 @@ spec:
         - mountPath: /watch
           name: watch-volume
         env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
         - name: TZ
           value: "Europe/Prague"
         - name: USER
