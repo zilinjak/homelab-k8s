@@ -232,9 +232,6 @@ spec:
   - metadata:
       name: pms-config
     spec:
-      persistentVolumeClaimRetentionPolicy:
-        whenDeleted: Retain
-        whenScaled: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
