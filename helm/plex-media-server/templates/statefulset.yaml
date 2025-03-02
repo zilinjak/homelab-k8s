@@ -127,7 +127,7 @@ spec:
   - metadata:
       name: transmission-config
     spec:
-    persistentVolumeReclaimPolicy: Retain
+      persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
@@ -138,7 +138,7 @@ spec:
   - metadata:
       name: transmission-watch
     spec:
-    persistentVolumeReclaimPolicy: Retain
+      persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
