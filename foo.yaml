@@ -1,0 +1,16 @@
+transmission:
+  host: transmission.internal.zilinek.fun
+  ingressClassName: "nginx"
+
+publicIngress:
+  enabled: true
+  ingressClassName: "nginx-external"
+  url: "plex.zilinek.fun"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+pms:
+  storageClassName: "longhorn-static"
+  configStorage: 500Gi
+extraEnv:
+  # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
+  PLEX_CLAIM: "claim-i5z_UziXs5edx_6eg-o6"
