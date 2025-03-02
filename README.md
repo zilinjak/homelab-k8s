@@ -14,19 +14,19 @@ I have decided to create a homelab, mainly to improve my skills in k8s and knowl
 - external-dns - currently only in dry mode, is supposed to sync *.internal.zilinek.fun to pihole, this needs to be finished
 
 ## To Do
-- [ ] Separete ingress for *.public.zilinek.fun and *.private.zilinek.fun
+- [x] Separete ingress for *.zilinek.fun and *.private.zilinek.fun
   - [x] Internal ingress
-  - [ ] External ingress -> This will required different impl of LoadBalancer - MetalLB
+  - [x] External ingress -> This will required different impl of LoadBalancer - MetalLB
 - [ ] Secrets solution, possible this - https://utkuozdemir.org/blog/argocd-helm-secrets/
    - See [this](https://docs.k3s.io/cli/secrets-encrypt)
    - We dont want secrets in repo, currently they are there
 - [ ] Fix PrometheusStack ( Alerts + Metrics from etcd, proxy, scheduler - more [here](https://github.com/k3s-io/k3s/issues/6207) and [here](https://github.com/k3s-io/k3s/issues/3619) ) 
-- [ ] HTTPS Certs
-- [ ] LongHorn
+- [x] HTTPS Certs
+- [x] LongHorn
 - [ ] Add PrometheusStack ( Loki, Tempo, OtelCollector )
 - [ ] Documentation App - how does the infra look like
 - [ ] JVM Memory and CPU analysis - mainly what GC adds what overhead
-- [ ] Plex server
+- [x] Plex server
 - [ ] More nodes?
 
 ## Developer notes
