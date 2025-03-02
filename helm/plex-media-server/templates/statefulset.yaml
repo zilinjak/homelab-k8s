@@ -10,6 +10,8 @@ metadata:
 {{ toYaml . | indent 4 }}
   {{- end }}
 spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
   serviceName: {{ include "pms-chart.fullname" . }}
   selector:
     matchLabels:
@@ -120,14 +122,12 @@ spec:
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
       {{- end }}
-      persistentVolumeReclaimPolicy: Retain
       resources:
         requests:
           storage: {{ .Values.pms.configStorage }}
   - metadata:
       name: transmission-config
     spec:
-      persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
@@ -138,7 +138,6 @@ spec:
   - metadata:
       name: transmission-watch
     spec:
-      persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
