@@ -26,8 +26,7 @@ spec:
           configStorage: 500Gi
 
           # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes        
-          plex_claim: ""
-            PLEX_CLAIM: "claim-AiieCy6Cdqh-pySRqurD"
+          plex_claim: "claim-AiieCy6Cdqh-pySRqurD"
   destination:
     server: https://kubernetes.default.svc
     namespace: plex-media-server
