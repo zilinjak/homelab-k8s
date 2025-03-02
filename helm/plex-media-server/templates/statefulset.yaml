@@ -120,18 +120,14 @@ spec:
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
       {{- end }}
-      persistentVolumeClaimRetentionPolicy:
-        whenDeleted: Retain
-        whenScaled: Retain
+      persistentVolumeReclaimPolicy: Retain
       resources:
         requests:
           storage: {{ .Values.pms.configStorage }}
   - metadata:
       name: transmission-config
     spec:
-      persistentVolumeClaimRetentionPolicy:
-        whenDeleted: Retain
-        whenScaled: Retain
+    persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
@@ -142,9 +138,7 @@ spec:
   - metadata:
       name: transmission-watch
     spec:
-      persistentVolumeClaimRetentionPolicy:
-        whenDeleted: Retain
-        whenScaled: Retain
+    persistentVolumeReclaimPolicy: Retain
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
       storageClassName: {{ .Values.pms.storageClassName }}
