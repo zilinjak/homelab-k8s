@@ -24,9 +24,10 @@ spec:
         pms:
           storageClassName: "longhorn-static"
           configStorage: 500Gi
-        extraEnv:
-          # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
-          PLEX_CLAIM: "claim-VzR2QA6-_cTrLg7uPpLX"
+
+          # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes        
+          plex_claim: ""
+            PLEX_CLAIM: "claim-AiieCy6Cdqh-pySRqurD"
   destination:
     server: https://kubernetes.default.svc
     namespace: plex-media-server

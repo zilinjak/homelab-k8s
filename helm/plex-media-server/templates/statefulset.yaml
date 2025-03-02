@@ -61,6 +61,8 @@ spec:
         - name: ADVERTISE_IP
           value: {{ .Values.publicIngress.url }}:443
         {{- end }}
+        - name: PLEX_CLAIM
+          value: {{ .Values.pms.plex_claim | quote }}
         {{- if .Values.pms.gpu.nvidia.enabled }}
         - name: NVIDIA_VISIBLE_DEVICES
           value: all
