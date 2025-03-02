@@ -17,6 +17,7 @@ spec:
           host: longhorn.internal.zilinek.fun
         preUpgradeChecker:
           jobEnabled: false
+        persistence.reclaimPolicy: Retain
 
   destination:
     server: 'https://kubernetes.default.svc'
