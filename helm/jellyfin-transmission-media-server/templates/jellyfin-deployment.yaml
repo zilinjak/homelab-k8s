@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jellyfin
+  name: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      volumes:
+      - name: nfs-jellyfin-config
+        persistentVolumeClaim:
+          claimName: jellyfin-config-pvc
+      - name: nfs-jellyfin-data
+        persistentVolumeClaim:
+          claimName: data-pvc
+      containers:
+      - env:
+        - name: TZ
+          value: Europe/Prague
+        securityContext:
+          privileged: true
+        image: ghcr.io/linuxserver/jellyfin
+        imagePullPolicy: Always
+        name: jellyfin
+        ports:
+        - containerPort: 8096
+          name: http-tcp
+          protocol: TCP
+        - containerPort: 8920
+          name: https-tcp
+          protocol: TCP
+        - containerPort: 1900
+          name: dlna-udp
+          protocol: UDP
+        - containerPort: 7359
+          name: discovery-udp
+          protocol: UDP
+        resources: {{ .Values.jellyfin.resources | toYaml | nindent 12 }}
+        stdin: true
+        tty: true
+        volumeMounts:
+        - mountPath: /config
+          name: nfs-jellyfin-config
+        - mountPath: /data
+          name: nfs-jellyfin-data
+      restartPolicy: Always
