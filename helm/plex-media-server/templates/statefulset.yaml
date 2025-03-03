@@ -59,7 +59,7 @@ spec:
         env:
         {{- if .Values.publicIngress.enabled }}
         - name: ADVERTISE_IP
-          value: {{ .Values.publicIngress.url }}:443
+          value: https://{{ .Values.publicIngress.url }}
         {{- end }}
         - name: PLEX_CLAIM
           value: {{ .Values.pms.plex_claim | quote }}
