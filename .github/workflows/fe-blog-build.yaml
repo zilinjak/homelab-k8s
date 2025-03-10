@@ -29,6 +29,8 @@ jobs:
     - name: Build Hugo site
       run: | 
         hugo
+        ls -la .
+        pwd
         ls -la public
 
     - name: Set up Docker Buildx
