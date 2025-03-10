@@ -27,7 +27,9 @@ jobs:
         hugo-version: 'latest'
 
     - name: Build Hugo site
-      run: hugo
+      run: | 
+        hugo
+        ls -la public
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3.10.0
