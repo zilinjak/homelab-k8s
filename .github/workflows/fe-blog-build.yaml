@@ -40,8 +40,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.15.0
       with:
-        context: .
-        file: Dockerfile
+        context: application_source/fe-blog
         push: true
         tags: ${{ vars.DOCKERHUB_USER }}/blog:${{ github.sha }}
         platforms: linux/amd64,linux/arm64
