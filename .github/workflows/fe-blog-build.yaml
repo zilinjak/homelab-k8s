@@ -53,13 +53,13 @@ jobs:
 
     - name: Version bump in values.yaml
       run: |
-        sed -i "s/tag: .*/tag: ${{ github.sha }}/g" application_source/fe-blog/helm/values.yaml
+        sed -i "s/tag: .*/tag: ${{ github.sha }}/g" helm/values.yaml
     
     - name: Commit and push version bump
       run: |
         git config --global user.email ""
         git config --global user.name "GitHub Actions"
-        git add application_source/fe-blog/helm/values.yaml
+        git add helm/values.yaml
         git commit -m "Bump version to ${{ github.sha }}"
         git push
     
