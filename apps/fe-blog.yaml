@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fe-blog
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/zilinjak/homelab-k8s.git'
+    targetRevision: HEAD
+    path: application_source/fe-blog/helm
+    helm:
+      values: |
+        
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: fe-blog
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
