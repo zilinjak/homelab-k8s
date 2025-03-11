@@ -48,7 +48,10 @@ jobs:
       with:
         context: application_source/fe-blog
         push: true
-        tags: ${{ vars.DOCKERHUB_USER }}/blog:${{ github.sha }}
+        tags: |
+          ${{ vars.DOCKERHUB_USER }}/blog:${{ github.sha }}
+          ${{ vars.DOCKERHUB_USER }}/blog:latest
+        cache-from: type=registry,ref=${{ vars.DOCKERHUB_USER }}/blog:latest
         platforms: linux/amd64,linux/arm64
 
     - name: Version bump in values.yaml
