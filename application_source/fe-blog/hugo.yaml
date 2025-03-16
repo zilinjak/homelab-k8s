@@ -8,11 +8,11 @@ params:
   title: Jakub Žilínek
   description: "Jakub Žilínek's blog"
   keywords: [Blog, It, K3s, K8s, ArgoCD, DevOps]
-  defaultTheme: auto # dark, light
-  disableThemeToggle: false
-
+  defaultTheme: dark
+  disableThemeToggle: true
+  disableShare: true
+  ShowShareButtons: false
   ShowReadingTime: true
-  ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -27,21 +27,9 @@ params:
   showtoc: false
   tocopen: false
 
-  assets:
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
-
-  label:
-    text: "Home"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
-
   # profile-mode
   profileMode:
-    enabled: True # needs to be explicitly set
+    enabled: False # needs to be explicitly set
     title: Jakub Žilínek
     subtitle: "DevOps / Backend engineer"
     imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQFHVXVhoCjFPQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1645014849572?e=1747872000&v=beta&t=qxlBC6zvFJKWDgyeAojXecASk4luF4wEU0BP3UDE1cA"
@@ -52,8 +40,16 @@ params:
         url: posts
       - name: Tags
         url: tags
+  homeInfoParams:
+    Title: "Jakub"
+    Content: >
+      - 👋 Welcome to my website/blog
 
-  socialIcons:
+      - This project was born as learning playground to 
+      learn new technologies and improve my knowledge in the field of DevOps and software engineering.
+
+      - **I will be happy if you read more about projects I have done:)**
+    socialIcons:
     - name: github
       url: "https://github.com/zilinjak"
 
@@ -79,14 +75,6 @@ params:
 
 menu:
   main:
-    - identifier: categories
-      name: categories
-      url: /categories/
-      weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
     - identifier: HTTPBin
       name: HTTPBin
       url: https://httpbin.zilinek.fun
