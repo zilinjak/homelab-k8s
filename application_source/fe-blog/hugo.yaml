@@ -1,26 +1,13 @@
-baseURL: "https://examplesite.com/"
-title: ExampleSite
+baseURL: "https://zilinek.fun/"
+title: Jakub Žilínek
 pagination.pagerSize: 5
 theme: PaperMod
 
-enableRobotsTXT: true
-buildDrafts: false
-buildFuture: false
-buildExpired: false
-
-minify:
-  disableXML: true
-  minifyOutput: true
-
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: ExampleSite
-  description: "ExampleSite description"
-  keywords: [Blog, Portfolio, PaperMod]
-  author: Me
-  # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: "January 2, 2006"
+  env: production
+  title: Jakub Žilínek
+  description: "Jakub Žilínek's blog"
+  keywords: [Blog, It, K3s, K8s, ArgoCD, DevOps]
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
@@ -28,7 +15,7 @@ params:
   ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
+  ShowCodeCopyButtons: true
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
@@ -41,8 +28,6 @@ params:
   tocopen: false
 
   assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
     favicon: "<link / abs url>"
     favicon16x16: "<link / abs url>"
     favicon32x32: "<link / abs url>"
@@ -56,31 +41,21 @@ params:
 
   # profile-mode
   profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    enabled: True # needs to be explicitly set
+    title: Jakub Žilínek
+    subtitle: "DevOps / Backend engineer"
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQFHVXVhoCjFPQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1645014849572?e=1747872000&v=beta&t=qxlBC6zvFJKWDgyeAojXecASk4luF4wEU0BP3UDE1cA"
     imageWidth: 120
     imageHeight: 120
-    imageTitle: my image
     buttons:
       - name: Posts
         url: posts
       - name: Tags
         url: tags
 
-  # home-info mode
-  homeInfoParams:
-    Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog
-
   socialIcons:
-    - name: x
-      url: "https://x.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
     - name: github
-      url: "https://github.com/"
+      url: "https://github.com/zilinjak"
 
   analytics:
     google:
@@ -89,16 +64,6 @@ params:
       SiteVerificationTag: "XYZabc"
     yandex:
       SiteVerificationTag: "XYZabc"
-
-  cover:
-    hidden: true # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
-
-  editPost:
-    URL: "https://github.com/<path_to_repo>/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
 
   # for search
   # https://fusejs.io/api/options.html
@@ -109,8 +74,9 @@ params:
     distance: 1000
     threshold: 0.4
     minMatchCharLength: 0
-    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    limit: 10
     keys: ["title", "permalink", "summary", "content"]
+
 menu:
   main:
     - identifier: categories
@@ -121,17 +87,13 @@ menu:
       name: tags
       url: /tags/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
+    - identifier: HTTPBin
+      name: HTTPBin
+      url: https://httpbin.zilinek.fun
       weight: 30
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-pygmentsUseClasses: true
-markup:
-  highlight:
-    noClasses: false
-    # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
-    # lineNos: true
-    # style: monokai
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
