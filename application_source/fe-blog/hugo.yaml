@@ -27,26 +27,17 @@ params:
   showtoc: false
   tocopen: false
 
-  # profile-mode
-  profileMode:
-    enabled: False # needs to be explicitly set
-    title: Jakub Žilínek
-    subtitle: "DevOps / Backend engineer"
-    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQFHVXVhoCjFPQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1645014849572?e=1747872000&v=beta&t=qxlBC6zvFJKWDgyeAojXecASk4luF4wEU0BP3UDE1cA"
-    imageWidth: 120
-    imageHeight: 120
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
   homeInfoParams:
-    Title: "Jakub"
+    Title: "Jakub Žilínek"
     Content: >
-      - 👋 Welcome to my website/blog
+      - 👋 Welcome to my blog
+
+      - 
 
       - This project was born as learning playground to 
       learn new technologies and improve my knowledge in the field of DevOps and software engineering.
+
+      - 
 
       - **I will be happy if you read more about projects I have done:)**
     socialIcons:
