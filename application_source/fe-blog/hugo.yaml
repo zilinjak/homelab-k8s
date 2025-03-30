@@ -8,8 +8,8 @@ params:
   title: Jakub Žilínek
   description: "Jakub Žilínek's blog"
   keywords: [Blog, It, K3s, K8s, ArgoCD, DevOps]
-  defaultTheme: dark
-  disableThemeToggle: true
+  defaultTheme: auto
+  disableThemeToggle: false
   disableShare: true
   ShowShareButtons: false
   ShowReadingTime: true
@@ -30,16 +30,20 @@ params:
   homeInfoParams:
     Title: "Jakub Žilínek"
     Content: >
-      - 👋 Welcome to my blog
+      - I'm **DevOps** engineer + **FullStack** Developer. Lately I mainly focus on backend technologies + DevOps.
+      
+      - I have experience with **Kubernetes**, **Docker**, **CI/CD**, and **cloud** technologies. Languages I use are mainly Python, Java, and Kotlin.
+      Also used or currently learning - **Go**, C++, JS, TS, and some other languages.
+
+      - 
+
+      - 👀 **I will be happy if you read more about projects I have done:)** 👀
 
       - 
 
       - This project was born as learning playground to 
       learn new technologies and improve my knowledge in the field of DevOps and software engineering.
 
-      - 
-
-      - **I will be happy if you read more about projects I have done:)**
     socialIcons:
     - name: github
       url: "https://github.com/zilinjak"

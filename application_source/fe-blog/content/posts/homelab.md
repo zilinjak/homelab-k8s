@@ -1,10 +1,9 @@
 ---
-title: "Homelab"
+title: "Homelab - My Kubernetes Journey"
 date: 2025-03-16T12:00:00+00:00
 draft: false
 tags: ["kubernetes", "devops", "homelab"]
 categories: ["infrastructure"]
-summary: "Documentation of my Kubernetes homelab journey"
 ShowToc: false
 ---
 
@@ -18,15 +17,15 @@ I decided to buy a **Raspberry Pi 5 8GB** and start my own homelab where I would
 
 ## Homelab Progress Checklist
 
-| Category                                                   | Task                                       | Status |
-|-------------------|-------------------------------------------------------------------------------------|--------|
-| [**Networking**](/posts/homelab-networking/#networking)    | LoadBalancer setup on bare metal           | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | Configure Ingress for internet traffic     | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | TLS certificates management (HTTPS setup)  | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | Internal vs External traffic configuration | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | VPN setup                                  | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | CertManager implementation                 | ✅     |
-| [**Networking**](/posts/homelab-networking/#networking)    | Make this website Google indexed           | ✅     |
+| Category          | Task                                                                                                          | Status |
+|-------------------|---------------------------------------------------------------------------------------------------------------|--------|
+| **Networking**    | [LoadBalancer setup on bare metal](/posts/networking-metallb/)                                                | ✅     |
+| **Networking**    | [Configure Ingress for internet traffic](/posts/networking-nginx-controllers/#nginx-ingress-controller)       | ✅     |
+| **Networking**    | [Internal vs External traffic configuration](/posts/networking-nginx-controllers/#external--internal-traffic) | ✅     |
+| **Networking**    | VPN setup - done on Router                                                                                    | ✅     |
+| **Networking**    | [CertManager implementation - HTTPS](/posts/networking-cert-manager)                                          | ✅     |
+| **Networking**    | [DNS - External DNS](/posts/networking-external-dns)                                                          | ✅     |
+| **Networking**    | Make this website Google indexed                                                                              | ❌     |
 | **Observability** | Grafana & Prometheus monitoring                                              | ❌     |
 | **Observability** | Loki & Tempo logging/tracing                                                 | ❌     |
 | **Observability** | OpenTelemetry Collector                                                      | ❌     |
