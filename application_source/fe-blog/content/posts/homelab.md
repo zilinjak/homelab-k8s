@@ -17,6 +17,8 @@ I decided to buy a **Raspberry Pi 5 8GB** and start my own homelab where I would
 
 ## Homelab Progress Checklist
 
+The links are clickable 👀 with more about the topic.
+
 | Category          | Task                                                                                                          | Status |
 |-------------------|---------------------------------------------------------------------------------------------------------------|--------|
 | **Networking**    | [LoadBalancer setup on bare metal](/posts/networking-metallb/)                                                | ✅     |
