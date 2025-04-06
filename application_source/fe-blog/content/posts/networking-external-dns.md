@@ -39,7 +39,9 @@ Many more... newly released Providers are in separate repository, see [this](htt
 ### PiHole + External DNS
 
 #### Pihole
-When you want to have custom DNS records in your own local network, you need to host your own DNS server. When I was doing some research about what DNS server to use, I found out about awesome project - [PiHole](https://pi-hole.net/). Pihole is a DNS server and in addition to that, it acts as an adblocker. The adblocking is done on the DNS level, this means that the hostnames that are known to be serving adds disabled and the DNS server wont resolve them. I thought that this feature is pretty cool and is nice addition the the DNS server. 
+When you want to have custom DNS records in your own local network, you need to host your own DNS server. When I was doing some research about what DNS server to use, I found out about awesome project - [PiHole](https://pi-hole.net/). 
+
+Pihole is a DNS server and in addition to that, it acts as an adblocker. The adblocking is done on the DNS level, this means that the hostnames that are known to be serving adds disabled and the DNS server wont resolve them. I thought that this feature is pretty cool and is nice addition the the DNS server. 
 
 #### External DNS + Pihole
 External DNS can be configured to work with Pihole. The configuration is pretty simple. Deploy Pihole - see [this](https://github.com/zilinjak/homelab-k8s/blob/main/apps/pihole.yaml)
