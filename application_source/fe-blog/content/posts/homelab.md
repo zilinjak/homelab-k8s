@@ -38,7 +38,7 @@ The links are clickable 👀 with more about the topic.
 | **Cluster**       | Add additional nodes                                                          | ❌     |
 | **Cluster**       | Dedicated master for core services                                            | ❌     |
 | **Cluster**       | Storage vs non-storage nodes configuration                                    | ❌     |
-| **Security**      | Secrets management with ArgoCD + Kubernetes                                   | ✅     |
+| **Security**      | Secrets management with ArgoCD + Kubernetes - https://external-secrets.io/latest/                                   | ✅     |
 | **Security**      | Network security (Firewall, VPN, etc.)                                        | ❌     |
 | **Projects**      | Plex media server                                                             | ✅     |
 | **Projects**      | Torrent server                                                                | ✅     |
