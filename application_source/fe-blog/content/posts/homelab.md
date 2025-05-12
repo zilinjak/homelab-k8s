@@ -28,26 +28,27 @@ The links are clickable 👀 with more about the topic.
 | **Networking**    | [CertManager implementation - HTTPS](/posts/networking-cert-manager)                                          | ✅     |
 | **Networking**    | [DNS - External DNS](/posts/networking-external-dns)                                                          | ✅     |
 | **Networking**    | Make this website Google indexed                                                                              | ❌     |
-| **Observability** | Grafana & Prometheus monitoring                                              | ❌     |
-| **Observability** | Loki & Tempo logging/tracing                                                 | ❌     |
-| **Observability** | OpenTelemetry Collector                                                      | ❌     |
-| **Observability** | Cluster log scraping                                                         | ❌     |
-| **ArgoCD**        | Installation script                                                           | ✅     |
-| **ArgoCD**        | App synchronization for cluster bootstrapping                                 | ✅     |
-| **ArgoCD**        | Projects deep dive                                                            | ❌     |
-| **Cluster**       | Add additional nodes                                                          | ❌     |
-| **Cluster**       | Dedicated master for core services                                            | ❌     |
-| **Cluster**       | Storage vs non-storage nodes configuration                                    | ❌     |
-| **Security**      | Secrets management with ArgoCD + Kubernetes - https://external-secrets.io/latest/                                   | ✅     |
-| **Security**      | Network security (Firewall, VPN, etc.)                                        | ❌     |
-| **Projects**      | Plex media server                                                             | ✅     |
-| **Projects**      | Torrent server                                                                | ✅     |
-| **Projects**      | PiHole + DNS configuration                                                    | ✅     |
-| **Projects**      | Longhorn storage system                                                       | ✅     |
-| **Projects**      | Longhorn multi-node deep dive                                                 | ❌     |
-| **Projects**      | Documentation application                                                     | ❌     |
-| **Projects**      | Cloud K6 load testing                                                         | ❌     |
-| **Projects**      | Performance benchmarks 📈                                                     | ❌     |
+| **Observability** | Grafana - [eBPF](https://grafana.com/oss/beyla-ebpf/)                                                         | ❌     |
+| **Observability** | Grafana & Prometheus monitoring                                                                               | ❌     |
+| **Observability** | Loki & Tempo logging/tracing                                                                                  | ❌     |
+| **Observability** | OpenTelemetry Collector                                                                                       | ❌     |
+| **Observability** | Cluster log scraping                                                                                          | ❌     |
+| **ArgoCD**        | Installation script                                                                                           | ✅     |
+| **ArgoCD**        | App synchronization for cluster bootstrapping                                                                 | ✅     |
+| **ArgoCD**        | Projects deep dive                                                                                            | ❌     |
+| **Cluster**       | Add additional nodes                                                                                          | ❌     |
+| **Cluster**       | Dedicated master for core services                                                                            | ❌     |
+| **Cluster**       | Storage vs non-storage nodes configuration                                                                    | ❌     |
+| **Security**      | Secrets management with ArgoCD + Kubernetes - https://external-secrets.io/latest/                             | ✅     |
+| **Security**      | Network security (Firewall, VPN, etc.)                                                                        | ❌     |
+| **Projects**      | Plex media server                                                                                             | ✅     |
+| **Projects**      | Torrent server                                                                                                | ✅     |
+| **Projects**      | PiHole + DNS configuration                                                                                    | ✅     |
+| **Projects**      | Longhorn storage system                                                                                       | ✅     |
+| **Projects**      | Longhorn multi-node deep dive                                                                                 | ❌     |
+| **Projects**      | Documentation application                                                                                     | ❌     |
+| **Projects**      | Cloud K6 load testing                                                                                         | ❌     |
+| **Projects**      | Performance benchmarks 📈                                                                                     | ❌     |
 
 ---
 
