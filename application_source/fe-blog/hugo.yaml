@@ -2,7 +2,7 @@ baseURL: "https://zilinek.fun/"
 title: Jakub Žilínek
 pagination.pagerSize: 5
 theme: PaperMod
-
+enableRobotsTXT: true
 params:
   env: production
   title: Jakub Žilínek
