@@ -28,7 +28,7 @@ The links are clickable 👀 with more about the topic.
 | **Networking**    | [CertManager implementation - HTTPS](/posts/networking-cert-manager)                                          | ✅     |
 | **Networking**    | [DNS - External DNS](/posts/networking-external-dns)                                                          | ✅     |
 | **Networking**    | Make this website Google indexed                                                                              | ❌     |
-| **Observability** | Grafana - [eBPF](https://grafana.com/oss/beyla-ebpf/)                                                         | ❌     |
+| **Observability** | Grafana - [eBPF](https://grafana.com/oss/beyla-ebpf/) or [cilium](https://github.com/cilium/cilium)           | ❌     |
 | **Observability** | Grafana & Prometheus monitoring                                                                               | ❌     |
 | **Observability** | Loki & Tempo logging/tracing                                                                                  | ❌     |
 | **Observability** | OpenTelemetry Collector                                                                                       | ❌     |
