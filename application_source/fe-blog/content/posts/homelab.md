@@ -49,6 +49,7 @@ The links are clickable 👀 with more about the topic.
 | **Projects**      | Documentation application                                                                                     | ❌     |
 | **Projects**      | Cloud K6 load testing                                                                                         | ❌     |
 | **Projects**      | Performance benchmarks 📈                                                                                     | ❌     |
+| **Projects**      | Quarkus v OTEL vs Without OTEL                                                                                | ❌     |
 
 ---
 
