@@ -27,7 +27,7 @@ The links are clickable 👀 with more about the topic.
 | **Networking**    | VPN setup - done on Router                                                                                    | ✅     |
 | **Networking**    | [CertManager implementation - HTTPS](/posts/networking-cert-manager)                                          | ✅     |
 | **Networking**    | [DNS - External DNS](/posts/networking-external-dns)                                                          | ✅     |
-| **Networking**    | Make this website Google indexed                                                                              | ❌     |
+| **Networking**    | Make this website Google indexed                                                                              | ✅     |
 | **Observability** | Grafana - [eBPF](https://grafana.com/oss/beyla-ebpf/) or [cilium](https://github.com/cilium/cilium)           | ❌     |
 | **Observability** | Grafana & Prometheus monitoring                                                                               | ❌     |
 | **Observability** | Loki & Tempo logging/tracing                                                                                  | ❌     |
@@ -35,7 +35,7 @@ The links are clickable 👀 with more about the topic.
 | **Observability** | Cluster log scraping                                                                                          | ❌     |
 | **ArgoCD**        | Installation script                                                                                           | ✅     |
 | **ArgoCD**        | App synchronization for cluster bootstrapping                                                                 | ✅     |
-| **ArgoCD**        | Projects deep dive                                                                                            | ❌     |
+| **ArgoCD**        | ArgoCD Projects deep dive                                                                                     | ❌     |
 | **Cluster**       | Add additional nodes                                                                                          | ❌     |
 | **Cluster**       | Dedicated master for core services                                                                            | ❌     |
 | **Cluster**       | Storage vs non-storage nodes configuration                                                                    | ❌     |
