@@ -1,5 +1,5 @@
 ---
-title: "Homelab - How I managed to kill my K3S cluster with SQLite"
+title: "Homelab - How I managed to kill my K3S with SQLite"
 date: 2025-03-16T12:30:00+00:00
 draft: false
 tags: ["kubernetes", "devops", "homelab", "sqlite", "k3s"]
