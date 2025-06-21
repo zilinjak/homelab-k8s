@@ -9,6 +9,7 @@ chmod +x k3s.sh
     --kube-controller-manager-arg address=0.0.0.0 \
     --kube-controller-manager-arg bind-address=0.0.0.0 \
     --kube-scheduler-arg bind-address=0.0.0.0 \
-    --kube-scheduler-arg address=0.0.0.0
+    --kube-scheduler-arg address=0.0.0.0 \
+    --init-cluster
 
 sudo cat /etc/rancher/k3s/k3s.yaml
