@@ -27,6 +27,15 @@ spec:
             enabled: true
             hosts: [ "grafana.internal.zilinek.fun" ]
             ingressClassName: "nginx"
+          persistence:
+            enabled: true
+            type: sts
+            storageClassName: "longhorn-static"
+            accessModes:
+              - ReadWriteOnce
+            size: 50Gi
+            finalizers:
+              - kubernetes.io/pvc-protection
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring  # Target namespace for deployment
