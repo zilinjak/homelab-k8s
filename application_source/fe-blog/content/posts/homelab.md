@@ -30,8 +30,8 @@ The links are clickable 👀 with more about the topic.
 | **Networking**    | Make this website Google indexed                                                                              | ✅     |
 | **Observability** | Grafana - [eBPF](https://grafana.com/oss/beyla-ebpf/) or [cilium](https://github.com/cilium/cilium)           | ❌     |
 | **Observability** | Grafana & Prometheus monitoring                                                                               | ❌     |
+| **Observability** | Kube-State-Metrics                                                                                            | ❌     |
 | **Observability** | Loki & Tempo logging/tracing                                                                                  | ❌     |
-| **Observability** | OpenTelemetry Collector                                                                                       | ❌     |
 | **Observability** | Cluster log scraping                                                                                          | ❌     |
 | **ArgoCD**        | Installation script                                                                                           | ✅     |
 | **ArgoCD**        | App synchronization for cluster bootstrapping                                                                 | ✅     |
