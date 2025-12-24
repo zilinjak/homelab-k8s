@@ -1,3 +1,4 @@
 init/terraform/.terraform
 init/terraform/.terraform.lock.hcl
 init/terraform/secret.tfvars
+.DS_Store
