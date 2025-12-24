@@ -17,6 +17,19 @@ spec:
             enabled: true
             hosts: [ "prometheus.internal.zilinek.fun" ]
             ingressClassName: "nginx"
+          prometheusSpec:
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: "longhorn-static"
+                  accessModes:
+                    - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: 50Gi
+                metadata:
+                  finalizers:
+                    - kubernetes.io/pvc-protection
         alertmanager:
           ingress:
             enabled: true
