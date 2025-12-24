@@ -27,9 +27,6 @@ spec:
                   resources:
                     requests:
                       storage: 50Gi
-                metadata:
-                  finalizers:
-                    - kubernetes.io/pvc-protection
         alertmanager:
           ingress:
             enabled: true
