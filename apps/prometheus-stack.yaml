@@ -47,11 +47,11 @@ spec:
             finalizers:
               - kubernetes.io/pvc-protection
           additionalDataSources:
-            - name: Tempo-2
+            - name: Tempo
               type: tempo
               access: proxy
               url: http://tempo.monitoring.svc.cluster.local:3200
-          
+              editable: false
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring # Target namespace for deployment
