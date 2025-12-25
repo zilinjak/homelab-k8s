@@ -49,7 +49,9 @@ spec:
           additionalDataSources:
             - name: Tempo-2
               type: tempo
+              access: proxy
               url: http://tempo.monitoring.svc.cluster.local:3200
+          
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring # Target namespace for deployment
