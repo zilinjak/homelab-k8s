@@ -46,6 +46,11 @@ spec:
             size: 50Gi
             finalizers:
               - kubernetes.io/pvc-protection
+          sidecar:
+            datasources:
+              enabled: true
+              label: grafana_datasource
+              labelValue: "1"
           additionalDataSources:
             - name: "Tempo-5"
               type: tempo
@@ -53,6 +58,7 @@ spec:
               url: http://tempo.monitoring.svc.cluster.local:3200
               uid: tempo
               editable: false
+              isDefault: false
               jsonData:
                 httpMethod: GET
                 serviceMap:
