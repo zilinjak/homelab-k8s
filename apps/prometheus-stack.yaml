@@ -47,7 +47,7 @@ spec:
             finalizers:
               - kubernetes.io/pvc-protection
           additionalDataSources:
-            - name: Tempo
+            - name: "Tempo-5"
               type: tempo
               access: proxy
               url: http://tempo.monitoring.svc.cluster.local:3200
