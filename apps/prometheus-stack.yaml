@@ -1,80 +1,80 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: prometheus-stack
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: "https://github.com/zilinjak/homelab-k8s.git"
-    targetRevision: HEAD
-    path: helm/kube-prometheus-stack
-    helm:
-      values: |
-        prometheus:
-          enabled: true
-          ingress:
-            enabled: true
-            hosts: [ "prometheus.internal.zilinek.fun" ]
-            ingressClassName: "nginx"
-          prometheusSpec:
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  storageClassName: "longhorn-static"
-                  accessModes:
-                    - ReadWriteOnce
-                  resources:
-                    requests:
-                      storage: 50Gi
-        alertmanager:
-          ingress:
-            enabled: true
-            hosts: [ "alertmanager.internal.zilinek.fun" ]
-            ingressClassName: "nginx"
-        grafana:
-          ingress:
-            enabled: true
-            hosts: [ "grafana.internal.zilinek.fun" ]
-            ingressClassName: "nginx"
-          persistence:
-            enabled: true
-            type: sts
-            storageClassName: "longhorn-static"
-            accessModes:
-              - ReadWriteOnce
-            size: 50Gi
-            finalizers:
-              - kubernetes.io/pvc-protection
-          sidecar:
-            datasources:
-              enabled: true
-              label: grafana_datasource
-              labelValue: "1"
-          additionalDataSources:
-            - name: Loki
-              type: loki
-              access: proxy
-              url: http://loki-gateway.monitoring.svc.cluster.local
-              editable: false
-              jsonData:
-                maxLines: 1000
-            - name: Tempo
-              type: tempo
-              access: proxy
-              url: http://tempo.monitoring.svc.cluster.local:3200
-              uid: tempo
-              editable: false
-              jsonData:
-                httpMethod: GET
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: prometheus-stack
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: "https://github.com/zilinjak/homelab-k8s.git"
+#     targetRevision: HEAD
+#     path: helm/kube-prometheus-stack
+#     helm:
+#       values: |
+#         prometheus:
+#           enabled: true
+#           ingress:
+#             enabled: true
+#             hosts: [ "prometheus.internal.zilinek.fun" ]
+#             ingressClassName: "nginx"
+#           prometheusSpec:
+#             storageSpec:
+#               volumeClaimTemplate:
+#                 spec:
+#                   storageClassName: "longhorn-static"
+#                   accessModes:
+#                     - ReadWriteOnce
+#                   resources:
+#                     requests:
+#                       storage: 50Gi
+#         alertmanager:
+#           ingress:
+#             enabled: true
+#             hosts: [ "alertmanager.internal.zilinek.fun" ]
+#             ingressClassName: "nginx"
+#         grafana:
+#           ingress:
+#             enabled: true
+#             hosts: [ "grafana.internal.zilinek.fun" ]
+#             ingressClassName: "nginx"
+#           persistence:
+#             enabled: true
+#             type: sts
+#             storageClassName: "longhorn-static"
+#             accessModes:
+#               - ReadWriteOnce
+#             size: 50Gi
+#             finalizers:
+#               - kubernetes.io/pvc-protection
+#           sidecar:
+#             datasources:
+#               enabled: true
+#               label: grafana_datasource
+#               labelValue: "1"
+#           additionalDataSources:
+#             - name: Loki
+#               type: loki
+#               access: proxy
+#               url: http://loki-gateway.monitoring.svc.cluster.local
+#               editable: false
+#               jsonData:
+#                 maxLines: 1000
+#             - name: Tempo
+#               type: tempo
+#               access: proxy
+#               url: http://tempo.monitoring.svc.cluster.local:3200
+#               uid: tempo
+#               editable: false
+#               jsonData:
+#                 httpMethod: GET
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring # Target namespace for deployment
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: monitoring # Target namespace for deployment
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
