@@ -33,6 +33,8 @@ spec:
             hosts: [ "alertmanager.internal.zilinek.fun" ]
             ingressClassName: "nginx"
         grafana:
+          adminUser: admin
+          adminPassword: admin
           ingress:
             enabled: true
             hosts: [ "grafana.internal.zilinek.fun" ]
