@@ -59,20 +59,15 @@ spec:
               editable: false
               jsonData:
                 maxLines: 1000
-            - name: "Tempo-5"
+            - name: Tempo
               type: tempo
               access: proxy
               url: http://tempo.monitoring.svc.cluster.local:3200
               uid: tempo
               editable: false
-              isDefault: false
               jsonData:
                 httpMethod: GET
-                serviceMap:
-                  datasourceUid: prometheus
-                nodeGraph:
-                  enabled: true
-              
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring # Target namespace for deployment
