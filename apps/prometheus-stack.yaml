@@ -52,6 +52,13 @@ spec:
               label: grafana_datasource
               labelValue: "1"
           additionalDataSources:
+            - name: Loki
+              type: loki
+              access: proxy
+              url: http://loki-gateway.monitoring.svc.cluster.local
+              editable: false
+              jsonData:
+                maxLines: 1000
             - name: "Tempo-5"
               type: tempo
               access: proxy
