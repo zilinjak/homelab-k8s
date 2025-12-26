@@ -47,11 +47,22 @@ spec:
             finalizers:
               - kubernetes.io/pvc-protection
           additionalDataSources:
-            - name: Foo
+            - name: Tempo
               type: tempo
               access: proxy
               url: http://tempo.monitoring.svc.cluster.local:3200
-              editable: false
+              uid: tempo
+              # editable: false
+              # jsonData:
+              #   httpMethod: GET
+              #   serviceMap:
+              #     datasourceUid: prometheus
+              #   search:
+              #     hide: false
+              #   nodeGraph:
+              #     enabled: true
+              #   lokiSearch:
+              #     datasourceUid: loki
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring # Target namespace for deployment
