@@ -28,22 +28,22 @@ spec:
 
         service:
           type: ClusterIP
-          ports:
-            otlp:
-              enabled: true
-              containerPort: 4317
-              servicePort: 4317
-              protocol: TCP
-            otlp-http:
-              enabled: true
-              containerPort: 4318
-              servicePort: 4318
-              protocol: TCP
-            metrics:
-              enabled: true
-              containerPort: 8888
-              servicePort: 8888
-              protocol: TCP
+
+        ports:
+          otlp:
+            enabled: true
+          otlp-http:
+            enabled: true
+          jaeger-compact:
+            enabled: false
+          jaeger-thrift:
+            enabled: false
+          jaeger-grpc:
+            enabled: false
+          zipkin:
+            enabled: false
+          metrics:
+            enabled: true
         
         config:
           receivers:
