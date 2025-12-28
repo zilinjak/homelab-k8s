@@ -53,9 +53,9 @@ spec:
               tls:
                 insecure: true
             
-            # Loki for logs
-            loki:
-              endpoint: http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push
+            # Loki for logs (using OTLP)
+            otlphttp/loki:
+              endpoint: http://loki-gateway.monitoring.svc.cluster.local/otlp
               tls:
                 insecure: true
             
@@ -82,7 +82,7 @@ spec:
               logs:
                 receivers: [otlp]
                 processors: [memory_limiter, batch]
-                exporters: [loki, logging]
+                exporters: [otlphttp/loki, logging]
         podMonitor:
           enabled: true
         ingress:
