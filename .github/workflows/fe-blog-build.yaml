@@ -1,19 +1,58 @@
-name: Build and Deploy FE Blog
+name: Build and Deploy Applications
 
 on:
   push:
     branches:
       - main
     paths:
-      - "application_source/fe-blog/**"
+      - "application_source/**"
   workflow_dispatch: ~
 
 jobs:
-  build:
+  detect-changes:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: application_source/fe-blog
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      has-changes: ${{ steps.set-matrix.outputs.has-changes }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed applications
+        id: set-matrix
+        run: |
+          # Get changed files
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # If manually triggered, build all apps
+            CHANGED_APPS=$(find application_source -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | jq -R -s -c 'split("\n")[:-1]')
+          else
+            # Get changed files in the last commit
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+            
+            # Extract unique app names from changed files
+            CHANGED_APPS=$(echo "$CHANGED_FILES" | grep "^application_source/" | cut -d'/' -f2 | sort -u | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0))')
+          fi
+          
+          echo "Changed apps: $CHANGED_APPS"
+          echo "matrix=$CHANGED_APPS" >> $GITHUB_OUTPUT
+          
+          # Check if there are any changes
+          if [ "$CHANGED_APPS" == "[]" ] || [ -z "$CHANGED_APPS" ]; then
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has-changes == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+      fail-fast: false
 
     steps:
       - name: Checkout repository
@@ -21,18 +60,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: "true"
-
-      - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.145.0"
-
-      - name: Build Hugo site
-        run: |
-          hugo
-          ls -la .
-          pwd
-          ls -la public
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.10.0
@@ -43,25 +70,43 @@ jobs:
           username: ${{ vars.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_SECRET }}
 
+      - name: Determine image name
+        id: image-name
+        run: |
+          # Convert app name to image name (e.g., fe-blog -> blog)
+          case "${{ matrix.app }}" in
+            fe-blog)
+              IMAGE_NAME="blog"
+              ;;
+            *)
+              IMAGE_NAME="${{ matrix.app }}"
+              ;;
+          esac
+          echo "name=$IMAGE_NAME" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.15.0
         with:
-          context: application_source/fe-blog
+          context: application_source/${{ matrix.app }}
           push: true
           tags: |
-            ${{ vars.DOCKERHUB_USER }}/blog:${{ github.sha }}
-            ${{ vars.DOCKERHUB_USER }}/blog:latest
-          cache-from: type=registry,ref=${{ vars.DOCKERHUB_USER }}/blog:latest
+            ${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:${{ github.sha }}
+            ${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:latest
+          cache-from: type=registry,ref=${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:latest
           platforms: linux/amd64,linux/arm64
 
       - name: Version bump in values.yaml
+        working-directory: application_source/${{ matrix.app }}
         run: |
-          sed -i "s/tag: .*/tag: ${{ github.sha }}/g" helm/values.yaml
+          if [ -f "helm/values.yaml" ]; then
+            sed -i "s/tag: .*/tag: ${{ github.sha }}/g" helm/values.yaml
+          fi
 
       - name: Commit and push version bump
         run: |
-          git config --global user.email ""
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
-          git add helm/values.yaml
-          git commit -m "Bump version to ${{ github.sha }}"
-          git push
+          git pull --rebase
+          git add application_source/${{ matrix.app }}/helm/values.yaml || true
+          git diff --staged --quiet || git commit -m "Bump ${{ matrix.app }} version to ${{ github.sha }}"
+          git push || true

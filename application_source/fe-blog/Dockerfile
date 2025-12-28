@@ -1,9 +1,20 @@
-# Use the official Nginx image from the Docker Hub
+# Stage 1: Build the Hugo site
+FROM peaceiris/hugo:v0.145.0 AS builder
+
+WORKDIR /src
+
+# Copy the Hugo site files
+COPY . .
+
+# Build the Hugo site
+RUN hugo
+
+# Stage 2: Serve with Nginx
 FROM nginx:latest
 
-# Copy the content of the current directory to the Nginx html directory
+# Copy the built site from the builder stage
 RUN rm -rf /usr/share/nginx/html/*
-COPY ./public /usr/share/nginx/html
+COPY --from=builder /src/public /usr/share/nginx/html
 RUN ls -la /usr/share/nginx/html
 
 # Expose port 80
