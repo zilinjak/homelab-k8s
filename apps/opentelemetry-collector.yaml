@@ -65,24 +65,24 @@ spec:
               tls:
                 insecure: true
             
-            # Debug/logging exporter
-            logging:
-              loglevel: info
+            # Debug exporter
+            debug:
+              verbosity: normal
           
           service:
             pipelines:
               traces:
                 receivers: [otlp]
                 processors: [memory_limiter, batch]
-                exporters: [otlp/tempo, logging]
+                exporters: [otlp/tempo, debug]
               metrics:
                 receivers: [otlp]
                 processors: [memory_limiter, batch]
-                exporters: [prometheusremotewrite, logging]
+                exporters: [prometheusremotewrite, debug]
               logs:
                 receivers: [otlp]
                 processors: [memory_limiter, batch]
-                exporters: [otlphttp/loki, logging]
+                exporters: [otlphttp/loki, debug]
         podMonitor:
           enabled: true
         ingress:
