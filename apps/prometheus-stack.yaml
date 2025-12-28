@@ -48,11 +48,6 @@ spec:
             size: 50Gi
             finalizers:
               - kubernetes.io/pvc-protection
-          sidecar:
-            datasources:
-              enabled: true
-              label: grafana_datasource
-              labelValue: "1"
           additionalDataSources:
             - name: Loki
               type: loki
