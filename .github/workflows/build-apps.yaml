@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Detect changed applications
         id: set-matrix
@@ -70,29 +68,15 @@ jobs:
           username: ${{ vars.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_SECRET }}
 
-      - name: Determine image name
-        id: image-name
-        run: |
-          # Convert app name to image name (e.g., fe-blog -> blog)
-          case "${{ matrix.app }}" in
-            fe-blog)
-              IMAGE_NAME="blog"
-              ;;
-            *)
-              IMAGE_NAME="${{ matrix.app }}"
-              ;;
-          esac
-          echo "name=$IMAGE_NAME" >> $GITHUB_OUTPUT
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.15.0
         with:
           context: application_source/${{ matrix.app }}
           push: true
           tags: |
-            ${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:${{ github.sha }}
-            ${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:latest
-          cache-from: type=registry,ref=${{ vars.DOCKERHUB_USER }}/${{ steps.image-name.outputs.name }}:latest
+            ${{ vars.DOCKERHUB_USER }}/${{ matrix.app }}:${{ github.sha }}
+            ${{ vars.DOCKERHUB_USER }}/${{ matrix.app }}:latest
+          cache-from: type=registry,ref=${{ vars.DOCKERHUB_USER }}/${{ matrix.app }}:latest
           platforms: linux/amd64,linux/arm64
 
       - name: Version bump in values.yaml
@@ -106,7 +90,15 @@ jobs:
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
-          git pull --rebase
           git add application_source/${{ matrix.app }}/helm/values.yaml || true
-          git diff --staged --quiet || git commit -m "Bump ${{ matrix.app }} version to ${{ github.sha }}"
+          
+          echo "Checking for staged changes..."
+          if git diff --staged --quiet; then
+            echo "No changes to commit - values.yaml already up to date"
+          else
+            echo "Staged changes detected, committing..."
+            git commit -m "Bump ${{ matrix.app }} version to ${{ github.sha }}"
+            echo "Changes committed successfully"
+          fi
+          
           git push || true

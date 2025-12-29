@@ -10,8 +10,7 @@ spec:
     targetRevision: HEAD
     path: application_source/fe-blog/helm
     helm:
-      values: |
-        
+      values: ""
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: fe-blog
