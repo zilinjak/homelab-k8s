@@ -1,5 +1,5 @@
 # Stage 1: Build the Hugo site
-FROM peaceiris/hugo:v0.145.0 AS builder
+FROM --platform=$BUILDPLATFORM peaceiris/hugo:v0.145.0 AS builder
 
 WORKDIR /src
 
