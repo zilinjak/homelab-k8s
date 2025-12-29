@@ -86,6 +86,8 @@ jobs:
         run: |
           if [ -f "helm/values.yaml" ]; then
             sed -i "s/tag: .*/tag: ${{ github.sha }}/g" helm/values.yaml
+          else
+            echo "::warning::No helm/values.yaml file found for ${{ matrix.app }}"
           fi
 
       - name: Commit and push version bump
