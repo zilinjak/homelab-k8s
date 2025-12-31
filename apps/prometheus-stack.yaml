@@ -18,6 +18,7 @@ spec:
             hosts: [ "prometheus.internal.zilinek.fun" ]
             ingressClassName: "nginx"
           prometheusSpec:
+            serviceMonitorSelectorNilUsesHelmValues: false
             retention: 30d
             retentionSize: "45GiB"
             storageSpec:
