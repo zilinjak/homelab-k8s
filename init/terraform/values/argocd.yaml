@@ -1,14 +1,13 @@
 configs:
   secret:
-      argocdServerAdminPassword: "$2a$10$.nVpvcRBopcfbCWaNtSLauHBkDNjz4uixh9TPkNhZIoDHYWIVUd8u"
-      argocdServerAdminPasswordMtime: "2025-01-01T23:17:27Z"
+    argocdServerAdminPassword: "$2a$10$.nVpvcRBopcfbCWaNtSLauHBkDNjz4uixh9TPkNhZIoDHYWIVUd8u"
+    argocdServerAdminPasswordMtime: "2025-01-01T23:17:27Z"
 
   params:
     server.insecure: true
-  
-  cm:
-    exec.enabled: false
 
+  cm:
+    exec.enabled: true
 
 server:
   ingress:
