@@ -1,4 +1,4 @@
-baseURL: "https://zilinek.fun/"
+baseURL: "https://zilinek.cloud/"
 title: Jakub Žilínek
 pagination.pagerSize: 5
 theme: PaperMod
@@ -35,7 +35,7 @@ params:
     Title: "Jakub Žilínek"
     Content: >
       - I'm **DevOps** engineer + **FullStack** Developer. Lately I mainly focus on backend technologies + DevOps.
-      
+
       - I have experience with **Kubernetes**, **Docker**, **CI/CD**, and **cloud** technologies. Languages I use are mainly Python, Java, and Kotlin.
       Also used or currently learning - **Go**, C++, JS, TS, and some other languages.
 
@@ -49,8 +49,8 @@ params:
       learn new technologies and improve my knowledge in the field of DevOps and software engineering.
 
     socialIcons:
-    - name: github
-      url: "https://github.com/zilinjak"
+      - name: github
+        url: "https://github.com/zilinjak"
 
   analytics:
     google:
@@ -80,7 +80,11 @@ menu:
   main:
     - identifier: HTTPBin
       name: HTTPBin
-      url: https://httpbin.zilinek.fun
+      url: https://httpbin.zilinek.cloud
+      weight: 30
+    - identifier: LinkedIn
+      name: LinkedIn
+      url: https://www.linkedin.com/in/jakub-zilinek-0a5794231/
       weight: 30
 
 outputs:
