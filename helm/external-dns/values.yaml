@@ -18,6 +18,7 @@ interval: 3m
 cloudflare:
   enabled: false
   # domainFilter: 'zilinek.fun'
+  # target: '37.143.116.177'  # Override target IP for all DNS records
   logLevel: info
   dryRun: false
   interval: 5m

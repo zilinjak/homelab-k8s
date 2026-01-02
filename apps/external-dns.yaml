@@ -20,6 +20,7 @@ spec:
         cloudflare:
           enabled: true
           domainFilter: 'zilinek.cloud'
+          target: '37.143.116.177'
           logLevel: 'info'
           dryRun: false
           interval: '5m'

@@ -39,6 +39,9 @@ spec:
         {{ if .Values.cloudflare.proxied }}
         - --cloudflare-proxied
         {{ end }}
+        {{ if .Values.cloudflare.target }}
+        - --target={{ .Values.cloudflare.target }}
+        {{ end }}
         - --domain-filter={{ .Values.cloudflare.domainFilter }}
         - --log-level={{ .Values.cloudflare.logLevel }}
         - --log-format=text
