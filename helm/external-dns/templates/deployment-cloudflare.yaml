@@ -28,7 +28,9 @@ spec:
         - --txt-owner-id=k8s
         - --policy=sync
         - --provider=cloudflare
-        - --cloudflare-proxied={{ .Values.cloudflare.proxied }}
+        {{ if .Values.cloudflare.proxied }}
+        - --cloudflare-proxied
+        {{ end }}
         - --domain-filter={{ .Values.cloudflare.domainFilter }}
         - --log-level={{ .Values.cloudflare.logLevel }}
         - --log-format=text
