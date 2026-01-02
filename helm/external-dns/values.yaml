@@ -8,9 +8,15 @@ dryRun: true
 interval: 3m
 
 # Cloudflare configuration
+# Note: Create a secret manually named 'cloudflare-api-key' with keys 'apiKey' and 'email'
+
+# kubectl create secret generic cloudflare-api-key \
+#   --from-literal=apiKey=YOUR_API_KEY \
+#   --from-literal=email=your-email@example.com \
+#   -n external-dns
+
 cloudflare:
   enabled: false
-  # apiToken: your-cloudflare-api-token
   # domainFilter: 'zilinek.fun'
   logLevel: info
   dryRun: false

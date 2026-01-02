@@ -19,7 +19,6 @@ spec:
         dryRun: false
         cloudflare:
           enabled: true
-          apiToken: 'YOUR_CLOUDFLARE_API_TOKEN'
           domainFilter: 'zilinek.cloud'
           logLevel: 'info'
           dryRun: false
