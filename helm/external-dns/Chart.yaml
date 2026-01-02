@@ -1,6 +1,6 @@
 apiVersion: v2
-name: external-dns-pihole
-description: A Helm chart for Kubernetes
+name: external-dns
+description: A Helm chart for External DNS with Pi-hole and Cloudflare support
 
 # A chart can be either an 'application' or a 'library' chart.
 #

@@ -1,0 +1,41 @@
+{{- if .Values.cloudflare.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns-cloudflare
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns-cloudflare
+  template:
+    metadata:
+      labels:
+        app: external-dns-cloudflare
+    spec:
+      serviceAccountName: external-dns
+      containers:
+      - name: external-dns
+        image: registry.k8s.io/external-dns/external-dns:v0.15.1
+        envFrom:
+        - secretRef:
+            name: cloudflare-api-token
+        args:
+        - --source=ingress
+        - --source=service
+        - --registry=txt
+        - --txt-owner-id=k8s
+        - --policy=sync
+        - --provider=cloudflare
+        - --cloudflare-proxied={{ .Values.cloudflare.proxied }}
+        - --domain-filter={{ .Values.cloudflare.domainFilter }}
+        - --log-level={{ .Values.cloudflare.logLevel }}
+        - --log-format=text
+        - --interval={{ .Values.cloudflare.interval }}
+        {{ if .Values.cloudflare.dryRun }}
+        - --dry-run
+        {{ end }}
+      securityContext:
+        fsGroup: 65534 # For ExternalDNS to be able to read Kubernetes token files
+{{- end }}

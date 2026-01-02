@@ -53,10 +53,14 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
+    - host: zilinek.cloud
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   tls:
     - hosts:
-        - zilinek.fun
-      secretName: fe-blog-tls  # Secret where the TLS certificate will be stored
+        - zilinek.cloud
+      secretName: fe-blog-tls-zilinek-cloud # Secret where the TLS certificate will be stored
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/zilinjak/homelab-k8s.git'
+    repoURL: "https://github.com/zilinjak/homelab-k8s.git"
     targetRevision: HEAD
-    path: helm/external-dns-pihole
+    path: helm/external-dns
     helm:
       values: |
         piholeServer: 'http://pihole-web.pihole.svc.cluster.local'
@@ -17,8 +17,16 @@ spec:
         targetNamespace: 'external-dns'
         domainFilter: 'internal.zilinek.fun'
         dryRun: false
+        cloudflare:
+          enabled: true
+          apiToken: 'YOUR_CLOUDFLARE_API_TOKEN'
+          domainFilter: 'zilinek.cloud'
+          logLevel: 'info'
+          dryRun: false
+          interval: '5m'
+          proxied: true
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
     namespace: external-dns
   syncPolicy:
     automated:

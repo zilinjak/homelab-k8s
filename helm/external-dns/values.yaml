@@ -1,0 +1,18 @@
+# Pi-hole configuration
+# password: admin
+# piholeServer: http://pihole-web.pihole.svc.cluster.local
+# targetNamespace: external-dns
+# domainFilter: 'internal.zilinek.fun'
+logLevel: info
+dryRun: true
+interval: 3m
+
+# Cloudflare configuration
+cloudflare:
+  enabled: false
+  # apiToken: your-cloudflare-api-token
+  # domainFilter: 'zilinek.fun'
+  logLevel: info
+  dryRun: false
+  interval: 5m
+  proxied: true
