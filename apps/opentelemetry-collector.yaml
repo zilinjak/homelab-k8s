@@ -83,8 +83,6 @@ spec:
                 receivers: [otlp]
                 processors: [memory_limiter, batch]
                 exporters: [otlphttp/loki, debug]
-        podMonitor:
-          enabled: true
         serviceMonitor:
           enabled: true
         ports:
