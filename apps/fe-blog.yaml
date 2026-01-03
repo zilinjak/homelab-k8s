@@ -11,7 +11,7 @@ spec:
     path: application_source/fe-blog/helm
     helm:
       values: |
-
+        empty: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: fe-blog
