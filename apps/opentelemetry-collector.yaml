@@ -12,13 +12,13 @@ spec:
     helm:
       values: |
         mode: deployment
-        
+
         replicaCount: 1
-        
+
         image:
           repository: otel/opentelemetry-collector-contrib
           tag: 0.142.0
-        
+
         resources:
           requests:
             cpu: 100m
@@ -28,7 +28,7 @@ spec:
 
         service:
           type: ClusterIP
-        
+
         config:
           receivers:
             otlp:
@@ -87,6 +87,9 @@ spec:
           enabled: true
         serviceMonitor:
           enabled: true
+        ports:
+          metrics:
+            enabled: true
         ingress:
           enabled: true
           ingressClassName: nginx
@@ -96,11 +99,11 @@ spec:
                 - path: /
                   pathType: Prefix
                   port: 4318
-  
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
-  
+
   syncPolicy:
     automated:
       prune: true
