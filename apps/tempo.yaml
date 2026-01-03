@@ -15,18 +15,17 @@ spec:
           enabled: true
           storageClassName: "longhorn-static"
           size: 10Gi
-        
+
         tempo:
           resources:
             requests:
-              cpu: 250m
-              memory: 512Mi
+              memory: 256Mi
             limits:
-              cpu: 500m
-              memory: 1Gi
+              memory: 256Gi
           
           retention: 48h
-          
+          metricsGenerator:
+            enabled: true
           storage:
             trace:
               backend: local
@@ -34,10 +33,10 @@ spec:
                 path: /var/tempo/traces
               wal:
                 path: /var/tempo/wal
-        
+
         service:
           type: ClusterIP
-        
+
         ingress:
           enabled: true
           ingressClassName: "nginx"
@@ -46,11 +45,11 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-  
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
-  
+
   syncPolicy:
     automated:
       prune: true
