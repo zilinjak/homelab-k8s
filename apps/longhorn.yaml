@@ -18,6 +18,9 @@ spec:
         preUpgradeChecker:
           jobEnabled: false
         persistence.reclaimPolicy: Retain
+        metrics:
+          serviceMonitor:
+            enabled: true
 
   destination:
     server: 'https://kubernetes.default.svc'
