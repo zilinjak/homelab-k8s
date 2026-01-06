@@ -18,7 +18,7 @@ spec:
         publicIngress:
           enabled: true
           ingressClassName: "nginx-external"
-          url: "plex.zilinek.fun"
+          url: "plex.zilinek.cloud"
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
         pms:
