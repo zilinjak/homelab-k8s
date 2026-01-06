@@ -15,6 +15,10 @@ spec:
           host: transmission.internal.zilinek.fun
           ingressClassName: "nginx"
 
+        filebrowser:
+          host: filebrowser.internal.zilinek.fun
+          ingressClassName: "nginx"
+
         publicIngress:
           enabled: true
           ingressClassName: "nginx-external"

@@ -278,3 +278,11 @@ extraContainers: []
 #        memory: 128Mi
 #    volumeMounts:
 #      - ...
+
+transmission:
+  ingressClassName: nginx-internal
+  host: transmission.local
+
+filebrowser:
+  ingressClassName: nginx-internal
+  host: filebrowser.local

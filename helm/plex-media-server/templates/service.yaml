@@ -36,3 +36,16 @@ spec:
   - protocol: TCP
     name: web-interface
     port: 9091
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: filebrowser-service
+spec:
+  selector:
+    {{- include "pms-chart.selectorLabels" . | nindent 4 }}
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80

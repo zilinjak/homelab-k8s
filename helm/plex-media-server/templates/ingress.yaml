@@ -49,3 +49,21 @@ spec:
                 name: transmission-service
                 port:
                   name: web-interface
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: filebrowser-ingress
+spec:
+  ingressClassName: {{ .Values.filebrowser.ingressClassName }}
+  rules:
+    - host: {{ .Values.filebrowser.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: filebrowser-service
+                port:
+                  name: http

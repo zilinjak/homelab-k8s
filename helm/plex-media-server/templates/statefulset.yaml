@@ -48,6 +48,10 @@ spec:
         emptyDir: {}
       - name: transmission-watch
         emptyDir: {}
+      - name: filebrowser-database
+        emptyDir: {}
+      - name: filebrowser-config
+        emptyDir: {}
       terminationGracePeriodSeconds: 120
       containers:
       - name: {{ include "pms-chart.fullname" . }}-pms
@@ -115,6 +119,20 @@ spec:
           name: transmission-config
         - mountPath: /watch
           name: transmission-watch
+      - name: filebrowser
+        image: filebrowser/filebrowser
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /srv
+          name: pms-config
+        - mountPath: /database
+          name: filebrowser-database
+        - mountPath: /config
+          name: filebrowser-config
   {{- if not .Values.pms.configExistingClaim }}
   volumeClaimTemplates:
   - metadata:
@@ -139,6 +157,26 @@ spec:
           storage: 1Gi
   - metadata:
       name: transmission-watch
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      {{- if .Values.pms.storageClassName }}
+      storageClassName: {{ .Values.pms.storageClassName }}
+      {{- end }}
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: filebrowser-database
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      {{- if .Values.pms.storageClassName }}
+      storageClassName: {{ .Values.pms.storageClassName }}
+      {{- end }}
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: filebrowser-config
     spec:
       accessModes: [ "ReadWriteOnce" ]
       {{- if .Values.pms.storageClassName }}
