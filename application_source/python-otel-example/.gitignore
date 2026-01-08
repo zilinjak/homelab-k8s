@@ -1,0 +1,6 @@
+.venv
+.idea
+__pycache__/
+*.pyc
+**/__pycache__/
+results.db
