@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sync-cd-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/zilinjak/homelab-k8s.git
+        revision: HEAD
+        directories:
+          - path: "cd-apps/*"
+  template:
+    metadata:
+      name: "{{path.basename}}"
+      namespace: "{{path.basename}}"
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/zilinjak/homelab-k8s.git
+        targetRevision: HEAD
+        path: "{{path}}"
+        helm:
+          valueFiles:
+            - values.yaml
+            - config.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{path.basename}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
