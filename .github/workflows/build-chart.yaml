@@ -1,0 +1,110 @@
+name: Build and Push Helm Chart (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      chart_path:
+        description: 'Path to the Helm chart directory'
+        required: true
+        type: string
+      registry:
+        description: 'OCI registry URL for Helm charts'
+        required: false
+        type: string
+        default: 'oci://registry-1.docker.io'
+      registry_prefix:
+        description: 'Registry prefix/namespace for the chart'
+        required: true
+        type: string
+      push:
+        description: 'Whether to push the chart'
+        required: false
+        type: boolean
+        default: true
+      app_version:
+        description: 'Application version to set in Chart.yaml'
+        required: false
+        type: string
+        default: ''
+      chart_version:
+        description: 'Chart version (if not set, will use version from Chart.yaml)'
+        required: false
+        type: string
+        default: ''
+    secrets:
+      registry_username:
+        description: 'Registry username'
+        required: true
+      registry_password:
+        description: 'Registry password/token'
+        required: true
+    outputs:
+      chart_version:
+        description: 'The chart version that was built'
+        value: ${{ jobs.build.outputs.chart_version }}
+      chart_name:
+        description: 'The chart name'
+        value: ${{ jobs.build.outputs.chart_name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      chart_version: ${{ steps.package.outputs.version }}
+      chart_name: ${{ steps.package.outputs.name }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'latest'
+
+      - name: Lint Helm chart
+        run: |
+          helm lint ${{ inputs.chart_path }}
+
+      - name: Update Chart metadata
+        if: inputs.app_version != '' || inputs.chart_version != ''
+        run: |
+          if [ -n "${{ inputs.app_version }}" ]; then
+            sed -i "s/^appVersion:.*/appVersion: \"${{ inputs.app_version }}\"/" ${{ inputs.chart_path }}/Chart.yaml
+          fi
+          if [ -n "${{ inputs.chart_version }}" ]; then
+            sed -i "s/^version:.*/version: ${{ inputs.chart_version }}/" ${{ inputs.chart_path }}/Chart.yaml
+          fi
+          
+      - name: Package Helm chart
+        id: package
+        run: |
+          helm package ${{ inputs.chart_path }}
+          CHART_NAME=$(helm show chart ${{ inputs.chart_path }} | grep '^name:' | awk '{print $2}')
+          CHART_VERSION=$(helm show chart ${{ inputs.chart_path }} | grep '^version:' | awk '{print $2}')
+          echo "name=${CHART_NAME}" >> $GITHUB_OUTPUT
+          echo "version=${CHART_VERSION}" >> $GITHUB_OUTPUT
+          echo "package=${CHART_NAME}-${CHART_VERSION}.tgz" >> $GITHUB_OUTPUT
+
+      - name: Log in to OCI Registry
+        if: inputs.push
+        run: |
+          echo "${{ secrets.registry_password }}" | helm registry login ${{ inputs.registry }} \
+            --username ${{ secrets.registry_username }} \
+            --password-stdin
+
+      - name: Push Helm chart
+        if: inputs.push
+        run: |
+          helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_prefix }}
+
+      - name: Log out from Registry
+        if: always() && inputs.push
+        run: |
+          helm registry logout ${{ inputs.registry }}
+
+      - name: Output chart info
+        run: |
+          echo "Chart name: ${{ steps.package.outputs.name }}"
+          echo "Chart version: ${{ steps.package.outputs.version }}"
+          echo "Package: ${{ steps.package.outputs.package }}"
