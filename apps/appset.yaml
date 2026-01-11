@@ -17,7 +17,7 @@ spec:
     spec:
       project: "default"
       source:
-        repoURL: https://github.com/zilinjak/homelab-k8s.git
+        repoURL: "{{repo}}"
         targetRevision: HEAD
         path: "{{chart}}"
         helm:
