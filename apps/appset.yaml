@@ -19,10 +19,9 @@ spec:
       source:
         repoURL: https://github.com/zilinjak/homelab-k8s.git
         targetRevision: HEAD
-        path: "{{ .chart }}"
+        path: "{{chart}}"
         helm:
           valueFiles:
-            - values.yaml
             - $values/cd-apps/{{path.basename}}/values.yaml
       destination:
         server: https://kubernetes.default.svc
