@@ -8,8 +8,8 @@ spec:
     - git:
         repoURL: https://github.com/zilinjak/homelab-k8s.git
         revision: HEAD
-        directories:
-          - path: "cd-apps/*"
+        files:
+          - path: "cd-apps/**/config.yaml"
   template:
     metadata:
       name: "{{path.basename}}"
@@ -19,11 +19,11 @@ spec:
       source:
         repoURL: https://github.com/zilinjak/homelab-k8s.git
         targetRevision: HEAD
-        path: "{{path}}"
+        path: "{{ .chart }}"
         helm:
           valueFiles:
             - values.yaml
-            - config.yaml
+            - $values/cd-apps/{{path.basename}}/values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{path.basename}}"
