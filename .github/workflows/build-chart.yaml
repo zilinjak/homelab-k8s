@@ -12,11 +12,6 @@ on:
         required: false
         type: string
         default: 'oci://registry-1.docker.io'
-      registry_prefix:
-        description: 'Registry prefix/namespace for the chart'
-        required: false
-        default: 'zilinjak99'
-        type: string
       push:
         description: 'Whether to push the chart'
         required: false
@@ -81,12 +76,18 @@ jobs:
       - name: Package Helm chart
         id: package
         run: |
-          helm package ${{ inputs.chart_path }}
+          GIT_COMMIT=$(git rev-parse --short HEAD)
           CHART_NAME=$(helm show chart ${{ inputs.chart_path }} | grep '^name:' | awk '{print $2}')
           CHART_VERSION=$(helm show chart ${{ inputs.chart_path }} | grep '^version:' | awk '{print $2}')
+          FULL_VERSION="${CHART_VERSION}-${GIT_COMMIT}"
+          
+          # Update version in Chart.yaml with git commit
+          sed -i "s/^version:.*/version: ${FULL_VERSION}/" ${{ inputs.chart_path }}/Chart.yaml
+          
+          helm package ${{ inputs.chart_path }}
           echo "name=${CHART_NAME}" >> $GITHUB_OUTPUT
-          echo "version=${CHART_VERSION}" >> $GITHUB_OUTPUT
-          echo "package=${CHART_NAME}-${CHART_VERSION}.tgz" >> $GITHUB_OUTPUT
+          echo "version=${FULL_VERSION}" >> $GITHUB_OUTPUT
+          echo "package=${CHART_NAME}-${FULL_VERSION}.tgz" >> $GITHUB_OUTPUT
 
       - name: Log in to OCI registry
         if: inputs.push
@@ -101,7 +102,7 @@ jobs:
       - name: Push Helm chart
         if: inputs.push
         run: |
-          helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_prefix }}
+          helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_username }}
 
       - name: Output chart info
         run: |
