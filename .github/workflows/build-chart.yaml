@@ -109,3 +109,14 @@ jobs:
           echo "Chart name: ${{ steps.package.outputs.name }}"
           echo "Chart version: ${{ steps.package.outputs.version }}"
           echo "Package: ${{ steps.package.outputs.package }}"
+          
+          # Add to GitHub Actions Summary
+          echo "## ⎈ Helm Chart Built Successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Chart:** \`${{ steps.package.outputs.name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** \`${{ steps.package.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** \`${{ steps.package.outputs.package }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Registry:** \`${{ inputs.registry }}/${{ inputs.registry_username }}\`" >> $GITHUB_STEP_SUMMARY
