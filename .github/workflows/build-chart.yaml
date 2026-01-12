@@ -87,7 +87,7 @@ jobs:
           echo "version=${CHART_VERSION}" >> $GITHUB_OUTPUT
           echo "package=${CHART_NAME}-${CHART_VERSION}.tgz" >> $GITHUB_OUTPUT
 
-      - name: Log in and Push Helm chart
+      - name: Log in to OCI registry
         if: inputs.push
         run: |
           REGISTRY_URL="${{ inputs.registry }}"
@@ -95,6 +95,11 @@ jobs:
           echo "${{ secrets.registry_password }}" | \
             helm registry login ${REGISTRY_URL} -u ${{ secrets.registry_username }} --password-stdin
 
+
+
+      - name: Push Helm chart
+        if: inputs.push
+        run: |
           helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_prefix }}
 
       - name: Output chart info
