@@ -15,7 +15,7 @@ on:
       registry_prefix:
         description: 'Registry prefix/namespace for the chart'
         required: false
-        default: 'zilinjak99/charts'
+        default: 'zilinjak99/workout-timer-chart'
         type: string
       push:
         description: 'Whether to push the chart'
