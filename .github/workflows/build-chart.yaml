@@ -14,7 +14,8 @@ on:
         default: 'oci://registry-1.docker.io'
       registry_prefix:
         description: 'Registry prefix/namespace for the chart'
-        required: true
+        required: false
+        default: 'zilinjak99/charts'
         type: string
       push:
         description: 'Whether to push the chart'
@@ -91,7 +92,9 @@ jobs:
         run: |
           REGISTRY_URL="${{ inputs.registry }}"
           REGISTRY_URL="${REGISTRY_URL#oci://}"
-          echo "${{ secrets.registry_password }}" | helm registry login ${REGISTRY_URL}/${{ inputs.registry_prefix }} -u ${{ secrets.registry_username }} --password-stdin
+          echo "${{ secrets.registry_password }}" | \
+            helm registry login ${REGISTRY_URL} -u ${{ secrets.registry_username }} --password-stdin
+
           helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_prefix }}
 
       - name: Output chart info
