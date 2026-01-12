@@ -91,7 +91,7 @@ jobs:
         run: |
           REGISTRY_URL="${{ inputs.registry }}"
           REGISTRY_URL="${REGISTRY_URL#oci://}"
-          echo "${{ secrets.registry_password }}" | helm registry login ${REGISTRY_URL} -u ${{ secrets.registry_username }} --password-stdin
+          echo "${{ secrets.registry_password }}" | helm registry login ${REGISTRY_URL}/${{ inputs.registry_prefix }} -u ${{ secrets.registry_username }} --password-stdin
           helm push ${{ steps.package.outputs.package }} ${{ inputs.registry }}/${{ inputs.registry_prefix }}
 
       - name: Output chart info
