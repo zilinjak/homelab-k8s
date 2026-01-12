@@ -89,7 +89,9 @@ jobs:
       - name: Log in to OCI Registry
         if: inputs.push
         run: |
-          echo "${{ secrets.registry_password }}" | helm registry login ${{ inputs.registry }} -u ${{ secrets.registry_username }} --password-stdin
+          REGISTRY_URL="${{ inputs.registry }}"
+          REGISTRY_URL="${REGISTRY_URL#oci://}"
+          echo "${{ secrets.registry_password }}" | helm registry login ${REGISTRY_URL} -u ${{ secrets.registry_username }} --password-stdin
 
       - name: Push Helm chart
         if: inputs.push
