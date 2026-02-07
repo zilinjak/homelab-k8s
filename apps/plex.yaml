@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/zilinjak/homelab-k8s.git'
+    repoURL: "https://github.com/zilinjak/homelab-k8s.git"
     targetRevision: HEAD
     path: helm/plex-media-server
     helm:
@@ -27,7 +27,7 @@ spec:
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
         pms:
           storageClassName: "longhorn-static"
-          configStorage: 500Gi
+          configStorage: 700Gi
 
           # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes        
           plex_claim: "claim-z-snd2YPiSdJqg2bk-85"
