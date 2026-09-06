@@ -11,6 +11,8 @@ spec:
     targetRevision: 0.3.22
     helm:
       values: |
+        hostNetwork: true
+        dnsPolicy: ClusterFirstWithHostNet
         ingress:
           enabled: true
           className: nginx
