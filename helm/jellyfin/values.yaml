@@ -42,9 +42,10 @@ publicIngress:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
 
+# The first library scan (ffprobe on every file) was OOMKilled at 1Gi.
 resources:
   requests:
     cpu: 500m
-    memory: 1024Mi
+    memory: 1Gi
   limits:
-    memory: 1024Mi
+    memory: 3Gi
