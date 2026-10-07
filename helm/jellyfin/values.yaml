@@ -32,9 +32,9 @@ ingress:
   className: nginx
   host: jellyfin.internal.zilinek.fun
 
-# Keep disabled until the setup wizard has been completed and an admin password is set.
+# Only enable after the setup wizard has been completed and an admin password is set.
 publicIngress:
-  enabled: false
+  enabled: true
   className: nginx-external
   host: jellyfin.zilinek.cloud
   annotations:
