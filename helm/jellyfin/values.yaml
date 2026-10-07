@@ -1,0 +1,50 @@
+image:
+  repository: docker.io/jellyfin/jellyfin
+  # Multi-architecture image, including arm64 for the Raspberry Pi.
+  tag: 12.2.20261005-225228@sha256:357724bf0ae27a672c7cbaa899db2d9abeb13dbd8657ccce750258a4c059d037
+  pullPolicy: IfNotPresent
+
+timezone: Europe/Prague
+
+# Jellyfin's own database, metadata and images.
+config:
+  storageClassName: longhorn-static
+  size: 20Gi
+
+# Transcodes and image cache; safe to lose on restart.
+cache:
+  sizeLimit: 20Gi
+
+media:
+  existingClaim: pms-config-plex-media-server-0
+  # ReadWriteOnce storage must be mounted on the same node as Plex.
+  plexInstance: plex-media-server
+  # Plex owns the library during the migration, so Jellyfin only reads it.
+  readOnly: true
+  # Each entry is mounted from the Plex volume at /media/<name>.
+  libraries:
+    - name: movies
+      subPath: Library/Movies
+    - name: tv
+      subPath: Library/Series
+
+ingress:
+  className: nginx
+  host: jellyfin.internal.zilinek.fun
+
+# Keep disabled until the setup wizard has been completed and an admin password is set.
+publicIngress:
+  enabled: false
+  className: nginx-external
+  host: jellyfin.zilinek.cloud
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 1024Mi
+  limits:
+    memory: 1024Mi

@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-config
   labels:
-    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/name: jellyfin
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   accessModes:
@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}
   labels:
-    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/name: jellyfin
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   replicas: 1
@@ -26,12 +26,12 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/name: jellyfin
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/name: jellyfin
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       automountServiceAccountToken: false
@@ -45,34 +45,34 @@ spec:
                   app.kubernetes.io/instance: {{ .Values.media.plexInstance }}
               topologyKey: kubernetes.io/hostname
       containers:
-        - name: sonarr
+        - name: jellyfin
           image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: PUID
-              value: {{ .Values.puid | quote }}
-            - name: PGID
-              value: {{ .Values.pgid | quote }}
             - name: TZ
               value: {{ .Values.timezone | quote }}
+            {{- if .Values.publicIngress.enabled }}
+            - name: JELLYFIN_PublishedServerUrl
+              value: {{ printf "https://%s" .Values.publicIngress.host | quote }}
+            {{- end }}
           ports:
             - name: http
-              containerPort: 8989
+              containerPort: 8096
           startupProbe:
             httpGet:
-              path: /ping
+              path: /health
               port: http
             periodSeconds: 5
-            failureThreshold: 60
+            failureThreshold: 120
           readinessProbe:
             httpGet:
-              path: /ping
+              path: /health
               port: http
             periodSeconds: 10
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
-              path: /ping
+              path: /health
               port: http
             periodSeconds: 30
             timeoutSeconds: 5
@@ -81,12 +81,21 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: cache
+              mountPath: /cache
+            {{- range .Values.media.libraries }}
             - name: media
-              mountPath: /downloads
+              mountPath: /media/{{ .name }}
+              subPath: {{ .subPath | quote }}
+              readOnly: {{ $.Values.media.readOnly }}
+            {{- end }}
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-config
+        - name: cache
+          emptyDir:
+            sizeLimit: {{ .Values.cache.sizeLimit }}
         - name: media
           persistentVolumeClaim:
             claimName: {{ .Values.media.existingClaim }}
@@ -95,14 +104,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/name: jellyfin
     app.kubernetes.io/instance: {{ .Release.Name }}
   ports:
     - name: http
-      port: 8989
+      port: 8096
       targetPort: http
 ---
 apiVersion: networking.k8s.io/v1
@@ -122,3 +134,31 @@ spec:
                 name: {{ .Release.Name }}
                 port:
                   name: http
+{{- if .Values.publicIngress.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-external
+  {{- with .Values.publicIngress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.publicIngress.className }}
+  rules:
+    - host: {{ .Values.publicIngress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - {{ .Values.publicIngress.host }}
+      secretName: {{ .Release.Name }}-ingress-lets-encrypt
+{{- end }}
